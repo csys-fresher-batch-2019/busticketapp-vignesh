@@ -1,8 +1,6 @@
-package BusTicket.BusList;
+package busticket.buslist;
 
 import java.util.Scanner;
-
-import BusTicket.BusList.BusTicketManagerImplimentation;
 
 public class TestdeleteBuslist {
 

@@ -1,12 +1,11 @@
-package BusTicket.SeatAvailability;
+package com.chainsys.busticketapp.model;
 
 public class SeatAvailability {
 	private int BusNo;
-	 private int AvailableSeats;
-	 public int TotalSeats;
-	
+	private int AvailableSeats;
+	public int TotalSeats;
 
-	 public int getBusNo() {
+	public int getBusNo() {
 		return BusNo;
 	}
 
@@ -27,8 +26,5 @@ public class SeatAvailability {
 		return "SeatAvailability [BusNo=" + BusNo + ", AvailableSeats=" + AvailableSeats + ", TotalSeats=" + TotalSeats
 				+ "]";
 	}
-
-		
-	
 
 }

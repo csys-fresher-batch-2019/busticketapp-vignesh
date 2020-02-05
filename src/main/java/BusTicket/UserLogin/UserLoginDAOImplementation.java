@@ -1,16 +1,18 @@
-package BusTicket.UserLogin;
+package busticket.userlogin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
-import BusTicket.TestConnections;
+import com.chainsys.busticketapp.dao.UserLoginDAO;
+import com.chainsys.busticketapp.model.UserLogin;
+import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class UserLoginDAOImplementation implements UserLoginDAO {
 	UserLogin obj=new UserLogin();
 	public void NewUserRegister(UserLogin obj) throws Exception{
 		String sql="insert into UserRegister(name,Email_id,password,contact,user_id) values(?,?,?,?,?)";
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		System.out.println(sql);
 		PreparedStatement pst=con.prepareStatement(sql);
 		pst.setString(1, obj.UserName);
@@ -24,7 +26,7 @@ public class UserLoginDAOImplementation implements UserLoginDAO {
 	}
 	public void RemoveUser(int UserId)throws Exception{
 		String sql="delete from UserRegister where user_id="+UserId;
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		//System.out.println(sql);
 		Statement stmt=con.createStatement();
 		int row=stmt.executeUpdate(sql);

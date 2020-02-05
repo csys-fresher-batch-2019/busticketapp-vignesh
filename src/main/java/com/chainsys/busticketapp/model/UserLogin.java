@@ -1,4 +1,4 @@
-package BusTicket.UserLogin;
+package com.chainsys.busticketapp.model;
 
 public class UserLogin {
 	public String UserName;
@@ -6,10 +6,11 @@ public class UserLogin {
 	public String password;
 	public Long contactNumber;
 	public int UserId;
+
 	@Override
 	public String toString() {
 		return "UserLogin [UserName=" + UserName + ", EmailId=" + EmailId + ", password=" + password
 				+ ", contactNumber=" + contactNumber + ", UserId=" + UserId + "]";
 	}
-	
+
 }

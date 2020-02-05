@@ -1,22 +1,20 @@
-package BusTicket.BusTiming;
+package busticket.bustiming;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import BusTicket.TestConnections;
-import BusTicket.Reservation.ListReservation;
+import com.chainsys.busticketapp.dao.TimingDAO;
+import com.chainsys.busticketapp.model.ListBusTiming;
+import com.chainsys.busticketapp.util.ConnectionUtil;
 
-public class BusTimingIplementation implements TimingManager{
+public class BusTimingIplementation implements TimingDAO{
 	public void addBusTiming(ListBusTiming obj) throws Exception {
 		String sql="insert into bus_time(bus_no,amount,departure_time,arraival_time) values(?,?,?,?)";
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		System.out.println(sql);
 		PreparedStatement pst=con.prepareStatement(sql);
 		pst.setInt(1,obj.BusNo);
@@ -31,7 +29,7 @@ public class BusTimingIplementation implements TimingManager{
 	public void deleteBusTiming(int BusNo) throws Exception{
 		String sql="delete from bus_time where bus_no="+BusNo;
 		System.out.println(sql);
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		Statement stmt=con.createStatement();
 		int row=stmt.executeUpdate(sql);
 		System.out.println(row);		
@@ -39,7 +37,7 @@ public class BusTimingIplementation implements TimingManager{
 	public List<ListBusTiming> BustimeDetails() throws Exception{
 		String sql="select * from bus_time";
 		System.out.println(sql);
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		Statement stmt=con.createStatement();
 		ArrayList<ListBusTiming> List=new ArrayList<ListBusTiming>();
 		ResultSet rs=stmt.executeQuery(sql);

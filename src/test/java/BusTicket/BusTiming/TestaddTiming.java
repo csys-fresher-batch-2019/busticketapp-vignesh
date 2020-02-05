@@ -1,8 +1,10 @@
-package BusTicket.BusTiming;
+package busticket.bustiming;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Scanner;
+
+import com.chainsys.busticketapp.model.ListBusTiming;
 
 public class TestaddTiming {
 

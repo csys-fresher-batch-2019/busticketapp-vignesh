@@ -1,12 +1,5 @@
-package BusTicket.BusList;
-import java.sql.Statement;
+package busticket.buslist;
 import java.util.Scanner;
-
-import BusTicket.BusList.BusTicketManagerImplimentation;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 //TestBusTicket
 public class TestAddBusList {
 

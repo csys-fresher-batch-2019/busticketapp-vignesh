@@ -1,8 +1,10 @@
-package BusTicket.Reservation;
+package busticket.reservation;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import com.chainsys.busticketapp.model.ListReservation;
 
 public class TestaddReservationList {
 

@@ -1,8 +1,10 @@
-package BusTicket.BusList;
+package busticket.buslist;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.chainsys.busticketapp.model.ListOfBuses;
 
 public class TestSearchbus {
 

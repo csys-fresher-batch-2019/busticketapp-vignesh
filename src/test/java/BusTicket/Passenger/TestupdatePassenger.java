@@ -1,4 +1,4 @@
-package BusTicket.Passenger;
+package busticket.passenger;
 
 import java.util.Scanner;
 

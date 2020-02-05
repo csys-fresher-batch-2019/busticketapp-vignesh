@@ -1,10 +1,7 @@
-package BusTicket.BusList;
+package busticket.buslist;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
-
-import BusTicket.BusList.BusTicketManagerImplimentation;
 
 public class TestNoOfBuslist {
 

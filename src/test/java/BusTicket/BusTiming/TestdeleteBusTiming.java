@@ -1,4 +1,4 @@
-package BusTicket.BusTiming;
+package busticket.bustiming;
 
 import java.util.Scanner;
 

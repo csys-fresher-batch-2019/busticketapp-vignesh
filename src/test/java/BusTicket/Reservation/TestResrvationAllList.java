@@ -1,6 +1,8 @@
-package BusTicket.Reservation;
+package busticket.reservation;
 
 import java.util.ArrayList;
+
+import com.chainsys.busticketapp.model.ListReservation;
 
 public class TestResrvationAllList {
 

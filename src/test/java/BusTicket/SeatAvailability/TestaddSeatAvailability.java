@@ -1,6 +1,8 @@
-package BusTicket.SeatAvailability;
+package busticket.seatavailability;
 
 import java.util.Scanner;
+
+import com.chainsys.busticketapp.model.SeatAvailability;
 
 public class TestaddSeatAvailability {
 

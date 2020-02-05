@@ -1,25 +1,25 @@
-package BusTicket.TestUserLogin;
+package busticket.testuserlogin;
 
 import java.util.Scanner;
 
-import BusTicket.BusList.TestAddBusList;
-import BusTicket.BusList.TestNoOfBuses;
-import BusTicket.BusList.TestNoOfBuslist;
-import BusTicket.BusList.TestSearchbus;
-import BusTicket.BusList.TestdeleteBuslist;
-import BusTicket.BusTiming.TestaddTiming;
-import BusTicket.BusTiming.TestdeleteBusTiming;
-import BusTicket.Login.LoginDAOImplementation;
-import BusTicket.Passenger.TestAddPassenger;
-import BusTicket.Passenger.TestdeletePassenger;
-import BusTicket.Passenger.TestupdatePassenger;
-import BusTicket.Reservation.TestCancelReservationList;
-import BusTicket.Reservation.TestResrvationAllList;
-import BusTicket.Reservation.TestaddReservationList;
-import BusTicket.Reservation.TestupdateNoOfTicketReservation;
-import BusTicket.SeatAvailability.TestAvailableSeats;
-import BusTicket.SeatAvailability.TestaddSeatAvailability;
-import BusTicket.SeatAvailability.TestupdateAvailableSeats;
+import busticket.buslist.TestAddBusList;
+import busticket.buslist.TestNoOfBuses;
+import busticket.buslist.TestNoOfBuslist;
+import busticket.buslist.TestSearchbus;
+import busticket.buslist.TestdeleteBuslist;
+import busticket.bustiming.TestaddTiming;
+import busticket.bustiming.TestdeleteBusTiming;
+import busticket.login.LoginDAOImplementation;
+import busticket.passenger.TestAddPassenger;
+import busticket.passenger.TestdeletePassenger;
+import busticket.passenger.TestupdatePassenger;
+import busticket.reservation.TestCancelReservationList;
+import busticket.reservation.TestResrvationAllList;
+import busticket.reservation.TestaddReservationList;
+import busticket.reservation.TestupdateNoOfTicketReservation;
+import busticket.seatavailability.TestAvailableSeats;
+import busticket.seatavailability.TestaddSeatAvailability;
+import busticket.seatavailability.TestupdateAvailableSeats;
 
 public class LoginMainpage {
 

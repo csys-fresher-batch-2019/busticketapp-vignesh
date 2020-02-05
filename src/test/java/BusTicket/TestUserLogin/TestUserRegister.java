@@ -1,9 +1,10 @@
-package BusTicket.TestUserLogin;
+package busticket.testuserlogin;
 
 import java.util.Scanner;
 
-import BusTicket.UserLogin.UserLogin;
-import BusTicket.UserLogin.UserLoginDAOImplementation;
+import com.chainsys.busticketapp.model.UserLogin;
+
+import busticket.userlogin.UserLoginDAOImplementation;
 
 public class TestUserRegister {
 

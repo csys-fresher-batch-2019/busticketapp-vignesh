@@ -1,4 +1,4 @@
-package BusTicket.BusList;
+package busticket.buslist;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import BusTicket.TestConnections;
+import com.chainsys.busticketapp.dao.BusTicketDAO;
+import com.chainsys.busticketapp.model.ListOfBuses;
+import com.chainsys.busticketapp.util.ConnectionUtil;
 
-public class BusTicketManagerImplimentation implements BusTicketManager {
+public class BusTicketManagerImplimentation implements BusTicketDAO {
 /*	public void admin() throws Exception {
 
 		System.out.println("Enter Admin_Name:");
@@ -152,7 +154,7 @@ else
 */
 	
 	public void addBuslist(int BusNo, String BusName, String BusSource, String BusDestination, String Class) throws Exception {
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		//String sql="insert into bus_list (bus_no,bus_name,bus_source,bus_destination,class)values+ (?,?,?,?,?)";//prepared statement needed
 		String sql="insert into bus_list (bus_no,bus_name,bus_source,bus_destination,class)values ("+BusNo+",'"+BusName+"','"+BusSource+"','"+BusDestination+"','"+Class+"')";
 		System.out.println(sql);
@@ -163,7 +165,7 @@ else
 	
 	}
 	public void deleteBuslist(int BusNo) throws Exception {
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		String sql1="delete from seat_availability where bus_no=?";
 		PreparedStatement pst1=con.prepareStatement(sql1);
 		pst1.setInt(1, BusNo);
@@ -188,7 +190,7 @@ else
 	 public int NoOfBuses() throws Exception {
 		 String sql="select count(*) as busCount  from bus_list"; 
 		 System.out.println(sql);
-		 Connection con = TestConnections.getConnection();
+		 Connection con = ConnectionUtil.getConnection();
 			Statement stmt=con.createStatement();
 			ResultSet rs=stmt.executeQuery(sql);
 			rs.next();
@@ -199,7 +201,7 @@ else
 	 public HashMap<String,Integer> NoOfBuslist() throws Exception{
 		 String sql="select bus_name,bus_no from bus_list";
 		 System.out.println(sql);
-		 Connection con = TestConnections.getConnection();
+		 Connection con = ConnectionUtil.getConnection();
 			Statement stmt=con.createStatement();
 			ResultSet rs=stmt.executeQuery(sql);
 			HashMap<String,Integer> obj=new HashMap<String,Integer>();
@@ -216,7 +218,7 @@ else
 		 String sql="select *from bus_list where bus_source='"+BusSource+"' and bus_destination='"+BusDestination+"'";
 		 //System.out.println(sql);
 		 System.out.println("BusNo:\tSource:\tDestination\tBusName:\tClass:");
-		 Connection con = TestConnections.getConnection();
+		 Connection con = ConnectionUtil.getConnection();
 			Statement stmt=con.createStatement();
 			ResultSet rs=stmt.executeQuery(sql);
 			List<ListOfBuses> Source= new ArrayList<ListOfBuses>();

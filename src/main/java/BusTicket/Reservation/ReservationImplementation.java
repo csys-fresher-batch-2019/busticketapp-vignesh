@@ -1,4 +1,4 @@
-package BusTicket.Reservation;
+package busticket.reservation;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -9,12 +9,14 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import BusTicket.TestConnections;
+import com.chainsys.busticketapp.dao.ReservationDAO;
+import com.chainsys.busticketapp.model.ListReservation;
+import com.chainsys.busticketapp.util.ConnectionUtil;
 
-public class ReservationImplementation implements ReservationManager {
+public class ReservationImplementation implements ReservationDAO {
 	ListReservation obj= new ListReservation();
 	public void addReservationList(ListReservation obj) throws Exception{
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		/*String sql="insert into reserve(ticket_no,bus_no,pas_id,no_of_ticket,journy_date) values(ticket_no.nextval,?,?,?,?)";
 		Connection con = TestConnections.getConnection();
 		System.out.println(sql);
@@ -45,7 +47,7 @@ public class ReservationImplementation implements ReservationManager {
 	public void cancelReservationList(int TicketNo) throws Exception{
 		String sql="delete from reserve where ticket_no="+TicketNo;
 		System.out.println(sql);
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		Statement stmt=con.createStatement();
 		int row=stmt.executeUpdate(sql);
 		System.out.println(row);	
@@ -53,7 +55,7 @@ public class ReservationImplementation implements ReservationManager {
 	public ArrayList<ListReservation> ReserveDetails() throws Exception{
 		String sql="select * from reserve";
 		System.out.println(sql);
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		Statement stmt=con.createStatement();
 		ArrayList<ListReservation> List=new ArrayList<ListReservation>();
 		ResultSet rs=stmt.executeQuery(sql);
@@ -73,7 +75,7 @@ public class ReservationImplementation implements ReservationManager {
 
 	public void updateNoOfTicket(int TicketNo,int PassengerId,int NoOfTicket) throws Exception{
 
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		Statement stmt=con.createStatement();
 		String sql="update reserve set no_of_ticket="+NoOfTicket+" where ticket_no= "+TicketNo+" and pas_id="+PassengerId+"";
 		System.out.println(sql);

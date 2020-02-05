@@ -1,14 +1,15 @@
-package BusTicket.Login;
+package busticket.login;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import BusTicket.TestConnections;
+import com.chainsys.busticketapp.dao.LoginDAO;
+import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class LoginDAOImplementation implements LoginDAO {
 	public boolean AdminLogin(String Adminname, String pass) throws Exception {
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		Statement stmt = con.createStatement();
 		if (stmt.executeUpdate("select Admin_name from AdminRegister where Admin_name='" + Adminname + "'") != 0) {
 			ResultSet rs = stmt
@@ -26,7 +27,7 @@ public class LoginDAOImplementation implements LoginDAO {
 
 	public boolean user(String name, String pass) throws Exception {
 
-		Connection con = TestConnections.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		Statement stmt = con.createStatement();
 		if (stmt.executeUpdate("select name from UserRegister where name='" + name + "'") != 0) {
 			ResultSet rs = stmt.executeQuery("select password from UserRegister where name='" + name + "'");

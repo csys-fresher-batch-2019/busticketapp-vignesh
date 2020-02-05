@@ -1,6 +1,4 @@
-package BusTicket.BusList;
-
-import BusTicket.BusList.BusTicketManagerImplimentation;
+package busticket.buslist;
 
 public class TestNoOfBuses {
 

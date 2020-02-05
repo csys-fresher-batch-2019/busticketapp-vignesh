@@ -1,4 +1,4 @@
-package BusTicket.Login;
+package com.chainsys.busticketapp.dao;
 
 public interface LoginDAO {
 	public boolean AdminLogin(String Adminname, String pass) throws Exception;

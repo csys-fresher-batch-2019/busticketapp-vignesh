@@ -1,7 +1,9 @@
-package BusTicket.BusTiming;
+package busticket.bustiming;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.chainsys.busticketapp.model.ListBusTiming;
 
 
 public class TestlistBusTiming {

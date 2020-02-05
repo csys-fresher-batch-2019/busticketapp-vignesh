@@ -1,12 +1,9 @@
-package BusTicket;
+package busticket;
 
 import java.util.Scanner;
 
-import BusTicket.BusList.BusTicketManagerImplimentation;
-import BusTicket.Login.LoginDAOImplementation;
-import BusTicket.TestUserLogin.LoginMainpage;
-import BusTicket.TestUserLogin.TestUserRegister;
-import BusTicket.UserLogin.UserLoginDAOImplementation;
+import busticket.testuserlogin.LoginMainpage;
+import busticket.testuserlogin.TestUserRegister;
 
 public class TestCall {
 public static void main(String[] args) throws Exception {

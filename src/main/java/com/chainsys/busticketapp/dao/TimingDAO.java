@@ -1,15 +1,14 @@
-package BusTicket.BusTiming;
+package com.chainsys.busticketapp.dao;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-import BusTicket.Reservation.ListReservation;
+import com.chainsys.busticketapp.model.ListBusTiming;
 
-public interface TimingManager {
+public interface TimingDAO {
 	void addBusTiming(ListBusTiming obj) throws Exception;
+
 	void deleteBusTiming(int BusNo) throws Exception;
+
 	List<ListBusTiming> BustimeDetails() throws Exception;
-	
 
 }

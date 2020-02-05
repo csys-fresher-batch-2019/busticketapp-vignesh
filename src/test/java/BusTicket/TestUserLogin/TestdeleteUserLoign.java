@@ -1,9 +1,8 @@
-package BusTicket.TestUserLogin;
+package busticket.testuserlogin;
 
 import java.util.Scanner;
 
-import BusTicket.SeatAvailability.SeatAvailabilityimplementation;
-import BusTicket.UserLogin.UserLoginDAOImplementation;
+import busticket.userlogin.UserLoginDAOImplementation;
 
 public class TestdeleteUserLoign {
 

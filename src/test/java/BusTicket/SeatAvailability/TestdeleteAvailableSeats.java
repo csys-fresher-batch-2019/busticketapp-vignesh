@@ -1,4 +1,4 @@
-package BusTicket.SeatAvailability;
+package busticket.seatavailability;
 
 import java.util.Scanner;
 
