@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import BusTicket.BusList.BusTicketManagerImplimentation;
 import BusTicket.Login.LoginDAOImplementation;
+import BusTicket.TestUserLogin.LoginMainpage;
 import BusTicket.TestUserLogin.TestUserRegister;
 import BusTicket.UserLogin.UserLoginDAOImplementation;
 
@@ -15,11 +16,11 @@ public static void main(String[] args) throws Exception {
 	switch(test)
 	{
 	case 1:
-		LoginDAOImplementation bus=new LoginDAOImplementation();
+		LoginMainpage bus=new LoginMainpage();
 		 bus.admin();
 		 break;
 	case 2:
-		LoginDAOImplementation bus1=new LoginDAOImplementation();
+		LoginMainpage bus1=new LoginMainpage();
 		 bus1.user();
 		 break;
 	case 3:

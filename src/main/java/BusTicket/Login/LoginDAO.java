@@ -1,6 +1,6 @@
 package BusTicket.Login;
 
 public interface LoginDAO {
-	public  void admin() throws Exception;
-	public  void user() throws Exception;
+	public boolean AdminLogin(String Adminname, String pass) throws Exception;
+	public boolean user(String name, String pass) throws Exception ;
 }

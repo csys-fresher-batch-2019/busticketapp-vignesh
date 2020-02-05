@@ -1,29 +1,14 @@
 package BusTicket.BusList;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
 
 import BusTicket.TestConnections;
-import BusTicket.BusTiming.TestaddTiming;
-import BusTicket.BusTiming.TestdeleteBusTiming;
-import BusTicket.Passenger.TestAddPassenger;
-import BusTicket.Passenger.TestdeletePassenger;
-import BusTicket.Passenger.TestupdatePassenger;
-import BusTicket.Reservation.TestResrvationAllList;
-import BusTicket.Reservation.TestaddReservationList;
-import BusTicket.Reservation.TestCancelReservationList;
-import BusTicket.Reservation.TestupdateNoOfTicketReservation;
-import BusTicket.SeatAvailability.TestAvailableSeats;
-import BusTicket.SeatAvailability.TestaddSeatAvailability;
-import BusTicket.SeatAvailability.TestupdateAvailableSeats;
 
 public class BusTicketManagerImplimentation implements BusTicketManager {
 /*	public void admin() throws Exception {
