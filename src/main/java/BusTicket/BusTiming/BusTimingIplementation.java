@@ -2,12 +2,16 @@ package BusTicket.BusTiming;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import BusTicket.TestConnections;
+import BusTicket.Reservation.ListReservation;
 
 public class BusTimingIplementation implements TimingManager{
 	public void addBusTiming(ListBusTiming obj) throws Exception {
@@ -32,7 +36,25 @@ public class BusTimingIplementation implements TimingManager{
 		int row=stmt.executeUpdate(sql);
 		System.out.println(row);		
 	}
-	
+	public List<ListBusTiming> BustimeDetails() throws Exception{
+		String sql="select * from bus_time";
+		System.out.println(sql);
+		Connection con = TestConnections.getConnection();
+		Statement stmt=con.createStatement();
+		ArrayList<ListBusTiming> List=new ArrayList<ListBusTiming>();
+		ResultSet rs=stmt.executeQuery(sql);
+		while(rs.next()) {
+			ListBusTiming obj = new ListBusTiming();
+			obj.BusNo=rs.getInt("bus_no");
+			obj.amount=rs.getInt("amount");
+			obj.departureTime=rs.getString("departure_time");
+			obj.arrivalTime=rs.getString("arraival_time");
+			List.add(obj);
+			
+				}
+		return List;
+		
+	}
 		
 
 }
