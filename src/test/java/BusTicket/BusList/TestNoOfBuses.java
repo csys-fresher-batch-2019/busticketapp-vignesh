@@ -6,7 +6,7 @@ public class TestNoOfBuses {
 		// TODO Auto-generated method stub
 		BusTicketManagerImplimentation Busimpl=new BusTicketManagerImplimentation();
 		
-		int count=Busimpl.NoOfBuses();
+		int count=Busimpl.noOfBuses();
 		System.out.println(count);
 	
 

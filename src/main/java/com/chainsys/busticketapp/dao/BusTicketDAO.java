@@ -12,9 +12,9 @@ public interface BusTicketDAO {
 
 	void deleteBuslist(int BusNo) throws Exception;
 
-	int NoOfBuses() throws Exception;
+	int noOfBuses() throws Exception;
 
-	HashMap<String, Integer> NoOfBuslist() throws Exception;
+	HashMap<String, Integer> noOfBuslist() throws Exception;
 
-	public List<ListOfBuses> SourceStationlist(String BusSource, String BusDestination) throws Exception;
+	public List<ListOfBuses> sourceStationlist(String BusSource, String BusDestination) throws Exception;
 }

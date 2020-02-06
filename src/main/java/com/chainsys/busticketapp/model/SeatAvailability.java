@@ -28,7 +28,7 @@ public class SeatAvailability {
 	}
 
 	private int availableSeats;
-	public int totalSeats;
+	private int totalSeats;
 
 	@Override
 	public String toString() {
