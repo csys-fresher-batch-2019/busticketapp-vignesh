@@ -26,15 +26,15 @@ public class BusTimingIplementation implements TimingDAO{
 		int row=pst.executeUpdate();
 		System.out.println(row);
 	}
-	public void deleteBusTiming(int BusNo) throws Exception{
-		String sql="delete from bus_time where bus_no="+BusNo;
+	public void deleteBusTiming(int busNo) throws Exception{
+		String sql="delete from bus_time where bus_no="+busNo;
 		System.out.println(sql);
 		Connection con = ConnectionUtil.getConnection();
 		Statement stmt=con.createStatement();
 		int row=stmt.executeUpdate(sql);
 		System.out.println(row);		
 	}
-	public List<ListBusTiming> BustimeDetails() throws Exception{
+	public List<ListBusTiming> bustimeDetails() throws Exception{
 		String sql="select * from bus_time";
 		System.out.println(sql);
 		Connection con = ConnectionUtil.getConnection();

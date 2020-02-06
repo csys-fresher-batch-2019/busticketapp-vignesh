@@ -10,8 +10,7 @@ public class TestaddReservationList {
 		Scanner sc = new Scanner(System.in);
 		ReservationImplementation impl = new ReservationImplementation();
 		ListReservation obj = new ListReservation();
-		// System.out.println("Enter the TicketNo:");
-		// obj.TicketNo=sc.nextInt();
+		
 		System.out.println("Enter the BusNo:");
 		obj.setBusNo(sc.nextInt());
 		System.out.println("Enter the PassengerId:");

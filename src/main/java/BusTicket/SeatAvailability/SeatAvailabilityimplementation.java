@@ -23,16 +23,16 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 		int row=pst.executeUpdate();
 		System.out.println(row);
 	}
-	public void deleteAvailableSeatlist(int BusNo) throws Exception{
-		String sql="delete from seat_availability where bus_no="+BusNo;
+	public void deleteAvailableSeatlist(int busNo) throws Exception{
+		String sql="delete from seat_availability where bus_no="+busNo;
 		Connection con = ConnectionUtil.getConnection();
 		//System.out.println(sql);
 		Statement stmt=con.createStatement();
 		int row=stmt.executeUpdate(sql);
 		System.out.println(row);
 	}
-	public void updateAvailableSeatlist(int AvailableSeats,int BusNo) throws Exception{
-		String sql="update seat_availability set available_seats="+AvailableSeats+" where bus_no= "+BusNo+"";
+	public void updateAvailableSeatlist(int availableSeats,int busNo) throws Exception{
+		String sql="update seat_availability set available_seats="+availableSeats+" where bus_no= "+busNo+"";
 		System.out.println(sql);
 		Connection con = ConnectionUtil.getConnection();
 		Statement stmt=con.createStatement();
@@ -40,7 +40,7 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 		System.out.println(row);
 		
 	}
-public List<SeatAvailability> AvailableSeatDetails(SeatAvailability obj) throws Exception{
+public List<SeatAvailability> availableSeatDetails(SeatAvailability obj) throws Exception{
 	 String sql="select *from seat_availability where bus_no="+obj.getBusNo();
 	 System.out.println(sql);
 	 Connection con = ConnectionUtil.getConnection();

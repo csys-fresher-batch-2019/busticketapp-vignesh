@@ -10,8 +10,8 @@ public class TestdeleteUserLoign {
 		UserLoginDAOImplementation impl = new UserLoginDAOImplementation();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter delete UserID:");
-		int UserId=sc.nextInt();
-		impl.RemoveUser(UserId);
+		int userId = sc.nextInt();
+		impl.removeUser(userId);
 
 	}
 

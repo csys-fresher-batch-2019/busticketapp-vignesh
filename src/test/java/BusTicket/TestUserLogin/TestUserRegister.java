@@ -23,7 +23,7 @@ public class TestUserRegister {
 		System.out.println("Enter the UserId:");
 		obj.setUserId(sc.nextInt());
 
-		impl.NewUserRegister(obj);
+		impl.newUserRegister(obj);
 
 	}
 

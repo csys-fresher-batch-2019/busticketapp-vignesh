@@ -15,8 +15,8 @@ public class UserAcc {
 
 		Scanner obj = new Scanner(System.in);
 		System.out.print("Enter your id : ");
-		int PasId = obj.nextInt();
-		boolean result = login(PasId);
+		int pasId = obj.nextInt();
+		boolean result = login(pasId);
 		if (result) {
 
 			System.out.println("Login Succesfully ");

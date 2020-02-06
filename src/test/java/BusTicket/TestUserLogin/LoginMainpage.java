@@ -24,25 +24,26 @@ import busticket.seatavailability.TestupdateAvailableSeats;
 
 public class LoginMainpage {
 
-	public static void main(String[] args)throws Exception {
-	admin();	
-	user();
+	public static void main(String[] args) throws Exception {
+		admin();
+		user();
 	}
-		
-		public static void admin() throws Exception {
 
-			System.out.println("Enter Admin_Name:");
-			Scanner sc=new Scanner(System.in);
-			String Admin=sc.next();
-			System.out.println("Enter Password:");
-			String pass=sc.next();
-			LoginDAOImplementation com=new LoginDAOImplementation();
-			if(com.AdminLogin(Admin, pass)) {
+	public static void admin() throws Exception {
+
+		System.out.println("Enter Admin_Name:");
+		Scanner sc = new Scanner(System.in);
+		String admin = sc.next();
+		System.out.println("Enter Password:");
+		String pass = sc.next();
+		LoginDAOImplementation com = new LoginDAOImplementation();
+		if (com.adminLogin(admin, pass)) {
 			System.out.println(">>>>LOGIN SUCESSFULL<<<<");
-			//view order details
-			System.out.println("1.Add BusList:\n2.2.Delete BusList:\n3.Delete PassengerList:\n4.Add BusTiming\n5.Delete BusTimimng\n6.Delete Reservationlist\n7.All ReservationList\n8.Add Seat Availability\n9.Update Seat Availability");
-			int n=sc.nextInt();
-			switch(n) {
+			// view order details
+			System.out.println(
+					"1.Add BusList:\n2.2.Delete BusList:\n3.Delete PassengerList:\n4.Add BusTiming\n5.Delete BusTimimng\n6.Delete Reservationlist\n7.All ReservationList\n8.Add Seat Availability\n9.Update Seat Availability");
+			int n = sc.nextInt();
+			switch (n) {
 			case 1:
 				TestAddBusList.main(null);
 				break;
@@ -70,30 +71,29 @@ public class LoginMainpage {
 			case 9:
 				TestupdateAvailableSeats.main(null);
 				break;
-				default:
-					System.out.println("Choose Correct Option:");
+			default:
+				System.out.println("Choose Correct Option:");
 			}
-			}
-			else
-			{
+		} else {
 			System.out.println(">>>>LOGIN FAILED<<<<");
-			}
+		}
 
-			}
-			
-		public static void user() throws Exception {
-			System.out.println("Enter UserName:");
-			Scanner sc=new Scanner(System.in);
-			String name=sc.next();
-			System.out.println("Enter Password:");
-			String pass=sc.next();
-			LoginDAOImplementation com=new LoginDAOImplementation();
-		if(com.user(name,pass)) {
+	}
+
+	public static void user() throws Exception {
+		System.out.println("Enter UserName:");
+		Scanner sc = new Scanner(System.in);
+		String name = sc.next();
+		System.out.println("Enter Password:");
+		String pass = sc.next();
+		LoginDAOImplementation com = new LoginDAOImplementation();
+		if (com.user(name, pass)) {
 			System.out.println(">>>>LOGIN SUCESSFULL<<<<");
-	//view bus details
-			System.out.println("1.No_Of_BusList:\n2.No_Of_Buses:\n3.Source And DestinationList:\n4.Available Seats:\n5:Add Passenger Details:\n6.Add ReservationList:\n7.Update PassengerDetails:\n8.Update No_Of_Ticket:");
-			int n=sc.nextInt();
-			switch(n) {
+			// view bus details
+			System.out.println(
+					"1.No_Of_BusList:\n2.No_Of_Buses:\n3.Source And DestinationList:\n4.Available Seats:\n5:Add Passenger Details:\n6.Add ReservationList:\n7.Update PassengerDetails:\n8.Update No_Of_Ticket:");
+			int n = sc.nextInt();
+			switch (n) {
 			case 1:
 				System.out.println("No_Of_BusList:");
 				TestNoOfBuslist.main(null);
@@ -126,15 +126,11 @@ public class LoginMainpage {
 				System.out.println("Choose Correct Option:");
 
 			}
-			
-	}
-	else
-	{
-		System.out.println("--------LOGIN FAILED---------");
-	}
+
+		} else {
+			System.out.println("--------LOGIN FAILED---------");
+		}
 
 	}
 
-
-	}
-
+}

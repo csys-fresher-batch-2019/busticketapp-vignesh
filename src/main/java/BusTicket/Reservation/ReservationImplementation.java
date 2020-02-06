@@ -41,8 +41,8 @@ public class ReservationImplementation implements ReservationDAO {
 		boolean b = stmt.execute();
 	}
 
-	public void cancelReservationList(int TicketNo) throws Exception {
-		String sql = "delete from reserve where ticket_no=" + TicketNo;
+	public void cancelReservationList(int ticketNo) throws Exception {
+		String sql = "delete from reserve where ticket_no=" + ticketNo;
 		System.out.println(sql);
 		Connection con = ConnectionUtil.getConnection();
 		Statement stmt = con.createStatement();
@@ -50,7 +50,7 @@ public class ReservationImplementation implements ReservationDAO {
 		System.out.println(row);
 	}
 
-	public ArrayList<ListReservation> ReserveDetails() throws Exception {
+	public ArrayList<ListReservation> reserveDetails() throws Exception {
 		String sql = "select * from reserve";
 		System.out.println(sql);
 		Connection con = ConnectionUtil.getConnection();
@@ -71,27 +71,27 @@ public class ReservationImplementation implements ReservationDAO {
 		return List;
 	}
 
-	public void updateNoOfTicket(int TicketNo, int PassengerId, int NoOfTicket) throws Exception {
+	public void updateNoOfTicket(int ticketNo, int passengerId, int noOfTicket) throws Exception {
 
 		Connection con = ConnectionUtil.getConnection();
 		Statement stmt = con.createStatement();
-		String sql = "update reserve set no_of_ticket=" + NoOfTicket + " where ticket_no= " + TicketNo + " and pas_id="
-				+ PassengerId + "";
+		String sql = "update reserve set no_of_ticket=" + noOfTicket + " where ticket_no= " + ticketNo + " and pas_id="
+				+ passengerId + "";
 		System.out.println(sql);
 		int row1 = stmt.executeUpdate(sql);
-		String sql1 = "select bus_no from reserve where ticket_no=" + TicketNo;
+		String sql1 = "select bus_no from reserve where ticket_no=" + ticketNo;
 		ResultSet rs = stmt.executeQuery(sql1);
 		rs.next();
 		int busid = rs.getInt("bus_no");
-		String sql2 = "update seat_availability set available_seats= available_seats-" + NoOfTicket + "where bus_no="
+		String sql2 = "update seat_availability set available_seats= available_seats-" + noOfTicket + "where bus_no="
 				+ busid;
 		int row = stmt.executeUpdate(sql2);
-		String sql3 = "update reserve set total_amount = (" + NoOfTicket
+		String sql3 = "update reserve set total_amount = (" + noOfTicket
 				+ "*(select amount from bus_time where bus_no=?))where bus_no=? and pas_id=?";
 		PreparedStatement pst = con.prepareStatement(sql3);
 		pst.setInt(1, busid);
 		pst.setInt(2, busid);
-		pst.setInt(3, PassengerId);
+		pst.setInt(3, passengerId);
 		System.out.println(sql3);
 		int row2 = pst.executeUpdate();
 		System.out.println(row);

@@ -4,9 +4,9 @@ public class TestNoOfBuses {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		BusTicketManagerImplimentation Busimpl=new BusTicketManagerImplimentation();
+		BusTicketManagerImplimentation busimpl=new BusTicketManagerImplimentation();
 		
-		int count=Busimpl.noOfBuses();
+		int count=busimpl.noOfBuses();
 		System.out.println(count);
 	
 

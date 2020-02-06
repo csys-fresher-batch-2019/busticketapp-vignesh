@@ -8,12 +8,12 @@ import com.chainsys.busticketapp.dao.LoginDAO;
 import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class LoginDAOImplementation implements LoginDAO {
-	public boolean AdminLogin(String Adminname, String pass) throws Exception {
+	public boolean adminLogin(String adminname, String pass) throws Exception {
 		Connection con = ConnectionUtil.getConnection();
 		Statement stmt = con.createStatement();
-		if (stmt.executeUpdate("select Admin_name from AdminRegister where Admin_name='" + Adminname + "'") != 0) {
+		if (stmt.executeUpdate("select Admin_name from AdminRegister where Admin_name='" + adminname + "'") != 0) {
 			ResultSet rs = stmt
-					.executeQuery("select pass_word from AdminRegister where Admin_name ='" + Adminname + "'");
+					.executeQuery("select pass_word from AdminRegister where Admin_name ='" + adminname + "'");
 			rs.next();
 			if (pass.equals(rs.getString("pass_word"))) {
 				return true;

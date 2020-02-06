@@ -8,8 +8,8 @@ public class TestCancelReservationList {
 		Scanner sc = new Scanner(System.in);
 		ReservationImplementation impl = new ReservationImplementation();
 		System.out.println(" Delete ReservationList:\n Enter the TicketNo:");
-		int TicketNo=sc.nextInt();
-		impl.cancelReservationList(TicketNo);
+		int ticketNo = sc.nextInt();
+		impl.cancelReservationList(ticketNo);
 	}
 
 }

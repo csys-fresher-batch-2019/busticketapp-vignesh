@@ -8,10 +8,10 @@ import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class PassengerImplementation implements PassengerDAO {
 
-	public void addPassengerlist(String PassengerName, int PassengerAge, String PassengerGender, long PassengerContact)
+	public void addPassengerlist(String passengerName, int passengerAge, String passengerGender, long passengerContact)
 			throws Exception {
 		String sql = "insert into passenger (pas_id,pas_name,pas_age,pas_gender,pas_contact)values (pas_id.nextval,'"
-				+ PassengerName + "'," + PassengerAge + ",'" + PassengerGender + "'," + PassengerContact + ")";
+				+ passengerName + "'," + passengerAge + ",'" + passengerGender + "'," + passengerContact + ")";
 		System.out.println(sql);
 		Connection con = ConnectionUtil.getConnection();
 		Statement stmt = con.createStatement();
@@ -20,9 +20,9 @@ public class PassengerImplementation implements PassengerDAO {
 
 	}
 
-	public void deletePassengerlist(int PassengerId) throws Exception {
+	public void deletePassengerlist(int passengerId) throws Exception {
 
-		String sql = "delete from passenger where pas_id=" + PassengerId;
+		String sql = "delete from passenger where pas_id=" + passengerId;
 		System.out.println(sql);
 		Connection con = ConnectionUtil.getConnection();
 		Statement stmt = con.createStatement();
@@ -30,9 +30,9 @@ public class PassengerImplementation implements PassengerDAO {
 		System.out.println(row);
 	}
 
-	public void updatePassengerlist(long PassengerContact, int PassengerId) throws Exception {
+	public void updatePassengerlist(long passengerContact, int passengerId) throws Exception {
 
-		String sql = "update passenger set pas_contact=" + PassengerContact + " where pas_id= " + PassengerId + "";
+		String sql = "update passenger set pas_contact=" + passengerContact + " where pas_id= " + passengerId + "";
 		System.out.println(sql);
 		Connection con = ConnectionUtil.getConnection();
 		Statement stmt = con.createStatement();

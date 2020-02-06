@@ -14,10 +14,10 @@ import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class BusTicketManagerImplimentation implements BusTicketDAO {
 
-	public void addBuslist(int BusNo, String BusName, String BusSource, String BusDestination, String Class) throws Exception {
+	public void addBuslist(int busNo, String busName, String busSource, String busDestination, String clazz) throws Exception {
 		Connection con = ConnectionUtil.getConnection();
 		//String sql="insert into bus_list (bus_no,bus_name,bus_source,bus_destination,class)values+ (?,?,?,?,?)";//prepared statement needed
-		String sql="insert into bus_list (bus_no,bus_name,bus_source,bus_destination,class)values ("+BusNo+",'"+BusName+"','"+BusSource+"','"+BusDestination+"','"+Class+"')";
+		String sql="insert into bus_list (bus_no,bus_name,bus_source,bus_destination,class)values ("+busNo+",'"+busName+"','"+busSource+"','"+busDestination+"','"+clazz+"')";
 		System.out.println(sql);
 		Statement stmt=con.createStatement();
 		int row=stmt.executeUpdate(sql);
@@ -25,16 +25,16 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 	
 	
 	}
-	public void deleteBuslist(int BusNo) throws Exception {
+	public void deleteBuslist(int busNo) throws Exception {
 		Connection con = ConnectionUtil.getConnection();
 		String sql1="delete from seat_availability where bus_no=?";
 		PreparedStatement pst1=con.prepareStatement(sql1);
-		pst1.setInt(1, BusNo);
+		pst1.setInt(1, busNo);
 		pst1.executeUpdate();
 		
 		String sql="delete from bus_list where bus_no=?";
 		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setInt(1, BusNo);
+		pst.setInt(1, busNo);
 		pst.executeUpdate();
 		//System.out.println(sql);
 		//Statement stmt=con.createStatement();
@@ -45,7 +45,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		//pst1.setInt(1, BusNo);
 		//pst1.executeUpdate();
 		//Statement stmt1=con.createStatement();
-		System.out.println(BusNo+" Bus Details are delete successfully");
+		System.out.println(busNo+" Bus Details are delete successfully");
 		con.close();
 	}
 	 public int noOfBuses() throws Exception {
@@ -75,8 +75,8 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			
 		 return obj;
 	 }
-	 public List<ListOfBuses> sourceStationlist(String BusSource,String BusDestination) throws Exception {
-		 String sql="select *from bus_list where bus_source='"+BusSource+"' and bus_destination='"+BusDestination+"'";
+	 public List<ListOfBuses> sourceStationlist(String busSource,String busDestination) throws Exception {
+		 String sql="select *from bus_list where bus_source='"+busSource+"' and bus_destination='"+busDestination+"'";
 		 //System.out.println(sql);
 		 System.out.println("BusNo:\tSource:\tDestination\tBusName:\tClass:");
 		 Connection con = ConnectionUtil.getConnection();

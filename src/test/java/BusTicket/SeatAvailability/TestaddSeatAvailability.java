@@ -17,7 +17,7 @@ public class TestaddSeatAvailability {
 		System.out.println("Enter the Total Seats:");
 		obj.setTotalSeats(sc.nextInt());
 		impl.addAvailableSeatlist(obj);
-		
+
 	}
 
 }

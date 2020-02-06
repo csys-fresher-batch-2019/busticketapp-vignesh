@@ -6,8 +6,8 @@ import java.util.Set;
 public class TestNoOfBuslist {
 
 	public static void main(String[] args) throws Exception {
-		BusTicketManagerImplimentation Busimpl = new BusTicketManagerImplimentation();
-		HashMap<String, Integer> names = Busimpl.noOfBuslist();
+		BusTicketManagerImplimentation busimpl = new BusTicketManagerImplimentation();
+		HashMap<String, Integer> names = busimpl.noOfBuslist();
 		Set<String> keyset = names.keySet();
 		System.out.println("Bus No | Bus Name");
 		System.out.println("-------------------");

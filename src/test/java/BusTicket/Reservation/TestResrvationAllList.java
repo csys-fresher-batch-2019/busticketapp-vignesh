@@ -8,10 +8,10 @@ public class TestResrvationAllList {
 
 	public static void main(String[] args) throws Exception {
 		ReservationImplementation impl = new ReservationImplementation();
-		ArrayList<ListReservation> List=new ArrayList<ListReservation>();
-		List=impl.ReserveDetails();
-		for (ListReservation Reserve : List) {
-			System.out.println(Reserve);
+		ArrayList<ListReservation> list = new ArrayList<ListReservation>();
+		list = impl.reserveDetails();
+		for (ListReservation reserve : list) {
+			System.out.println(reserve);
 		}
 
 	}

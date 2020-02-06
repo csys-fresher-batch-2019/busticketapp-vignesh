@@ -9,16 +9,16 @@ import com.chainsys.busticketapp.model.ListOfBuses;
 public class TestSearchbus {
 
 	public static void main(String[] args) throws Exception {
-		BusTicketManagerImplimentation Busimpl = new BusTicketManagerImplimentation();
+		BusTicketManagerImplimentation busimpl = new BusTicketManagerImplimentation();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter source Name:");
-		String Source = sc.next();
+		String source = sc.next();
 		System.out.println("Enter Destination Name:");
-		String Destination = sc.next();
-		List<ListOfBuses> SourceTest = new ArrayList<ListOfBuses>();
-		SourceTest = Busimpl.sourceStationlist(Source, Destination);
+		String destination = sc.next();
+		List<ListOfBuses> sourceTest = new ArrayList<ListOfBuses>();
+		sourceTest = busimpl.sourceStationlist(source, destination);
 
-		for (ListOfBuses p : SourceTest) {
+		for (ListOfBuses p : sourceTest) {
 			System.out.println(p.getBusNo() + "\t" + p.getBusSource() + "\t" + p.getBusDestination() + "\t\t"
 					+ p.getBusName() + "\t\t" + p.getClazz());
 

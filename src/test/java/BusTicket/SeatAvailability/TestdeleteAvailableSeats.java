@@ -8,9 +8,9 @@ public class TestdeleteAvailableSeats {
 		Scanner sc = new Scanner(System.in);
 		SeatAvailabilityimplementation impl = new SeatAvailabilityimplementation();
 		System.out.println("Enter the delete bus NO:");
-		int BusNo=sc.nextInt();
-		impl.deleteAvailableSeatlist(BusNo);
-		
+		int busNo = sc.nextInt();
+		impl.deleteAvailableSeatlist(busNo);
+
 	}
 
 }

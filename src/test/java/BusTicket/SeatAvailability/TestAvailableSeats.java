@@ -15,14 +15,11 @@ public class TestAvailableSeats {
 		System.out.println("Enter the BusNo Tocheck Available Seats:");
 		obj.setBusNo(sc.nextInt());
 		List<SeatAvailability> available = new ArrayList<SeatAvailability>();
-		available= impl.AvailableSeatDetails(obj);
-		 for (SeatAvailability p : available) {
-			System.out.println(p.getBusNo()+"\t"+p.getAvailableSeats()); 
+		available = impl.availableSeatDetails(obj);
+		for (SeatAvailability p : available) {
+			System.out.println(p.getBusNo() + "\t" + p.getAvailableSeats());
 		}
-		
-		 
-		 
-		
+
 	}
 
 }

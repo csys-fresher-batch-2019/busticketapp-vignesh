@@ -11,7 +11,7 @@ import com.chainsys.busticketapp.util.ConnectionUtil;
 public class UserLoginDAOImplementation implements UserLoginDAO {
 	UserLogin obj = new UserLogin();
 
-	public void NewUserRegister(UserLogin obj) throws Exception {
+	public void newUserRegister(UserLogin obj) throws Exception {
 		String sql = "insert into UserRegister(name,Email_id,password,contact,user_id) values(?,?,?,?,?)";
 		Connection con = ConnectionUtil.getConnection();
 		System.out.println(sql);
@@ -26,8 +26,8 @@ public class UserLoginDAOImplementation implements UserLoginDAO {
 
 	}
 
-	public void RemoveUser(int UserId) throws Exception {
-		String sql = "delete from UserRegister where user_id=" + UserId;
+	public void removeUser(int userId) throws Exception {
+		String sql = "delete from UserRegister where user_id=" + userId;
 		Connection con = ConnectionUtil.getConnection();
 		// System.out.println(sql);
 		Statement stmt = con.createStatement();

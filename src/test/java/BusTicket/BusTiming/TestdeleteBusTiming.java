@@ -7,9 +7,9 @@ public class TestdeleteBusTiming {
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("enter the delete bus No:");
-		int BusNo=sc.nextInt();
+		int busNo=sc.nextInt();
 		BusTimingIplementation timeimpl= new BusTimingIplementation();
-		timeimpl.deleteBusTiming(BusNo);
+		timeimpl.deleteBusTiming(busNo);
 
 	}
 

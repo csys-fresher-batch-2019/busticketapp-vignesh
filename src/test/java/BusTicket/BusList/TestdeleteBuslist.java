@@ -8,8 +8,8 @@ public class TestdeleteBuslist {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the delete bus No:");
 		int busid=sc.nextInt();
-		BusTicketManagerImplimentation Busimpl=new BusTicketManagerImplimentation();
-		Busimpl.deleteBuslist(busid);
+		BusTicketManagerImplimentation busimpl=new BusTicketManagerImplimentation();
+		busimpl.deleteBuslist(busid);
 		
 	}
 
