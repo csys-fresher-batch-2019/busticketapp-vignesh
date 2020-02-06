@@ -12,12 +12,12 @@ public class TestupdateNoOfTicketReservation {
 		ListReservation obj = new ListReservation();
 		System.out.println("Update Ticket Reservation");
 		System.out.println("Enter the Ticket No:");
-		obj.TicketNo=sc.nextInt();
+		obj.setTicketNo(sc.nextInt());
 		System.out.println("Enter PassengerId:");
-		obj.PassengerId=sc.nextInt();
+		obj.setPassengerId(sc.nextInt());
 		System.out.println("Update NoOfTicket:");
-		obj.NoOfTicket=sc.nextInt();
-		impl.updateNoOfTicket(obj.TicketNo, obj.PassengerId, obj.NoOfTicket);
+		obj.setNoOfTicket(sc.nextInt());
+		impl.updateNoOfTicket(obj.getTicketNo(), obj.getPassengerId(), obj.getNoOfTicket());
 	}
 
 }

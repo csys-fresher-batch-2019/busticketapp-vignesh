@@ -19,7 +19,7 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 		PreparedStatement pst=con.prepareStatement(sql);
 		pst.setInt(1, obj.getBusNo());
 		pst.setInt(2, obj.getAvailableSeats());
-		pst.setInt(3, obj.TotalSeats);
+		pst.setInt(3, obj.getTotalSeats());
 		int row=pst.executeUpdate();
 		System.out.println(row);
 	}

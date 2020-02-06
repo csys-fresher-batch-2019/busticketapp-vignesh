@@ -8,24 +8,23 @@ import busticket.userlogin.UserLoginDAOImplementation;
 
 public class TestUserRegister {
 
-	public static void main(String[] args)throws Exception {
+	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		UserLoginDAOImplementation impl = new UserLoginDAOImplementation();
 		UserLogin obj = new UserLogin();
 		System.out.println("Ener user name:");
-		obj.UserName=sc.next();
+		obj.setUserName(sc.next());
 		System.out.println("Enter the emailId:");
-		obj.EmailId=sc.next();
+		obj.setEmailId(sc.next());
 		System.out.println("Enter the password:");
-		obj.password=sc.next();
+		obj.setPassword(sc.next());
 		System.out.println("Enter the mobileNumber:");
-		obj.contactNumber=sc.nextLong();
+		obj.setContactNumber(sc.nextLong());
 		System.out.println("Enter the UserId:");
-		obj.UserId=sc.nextInt();
-		
+		obj.setUserId(sc.nextInt());
+
 		impl.NewUserRegister(obj);
-		
-		
+
 	}
 
 }

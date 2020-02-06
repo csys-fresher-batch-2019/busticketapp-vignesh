@@ -224,11 +224,11 @@ else
 			List<ListOfBuses> Source= new ArrayList<ListOfBuses>();
 			while(rs.next()) {
 				ListOfBuses p = new ListOfBuses();
-				p.BusNo=rs.getInt("bus_no");
-				p.BusName=rs.getString("bus_name");
-				p.BusSource=rs.getString("bus_source");
-				p.BusDestination=rs.getString("bus_destination");
-				p.Class=rs.getString("class");
+				p.setBusNo(rs.getInt("bus_no"));
+				p.setBusName(rs.getString("bus_name"));
+				p.setBusSource(rs.getString("bus_source"));
+				p.setBusDestination(rs.getString("bus_destination"));
+				p.setClazz(rs.getString("class"));
 				Source.add(p);
 				
 			}

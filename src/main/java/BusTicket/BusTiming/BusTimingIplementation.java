@@ -17,12 +17,12 @@ public class BusTimingIplementation implements TimingDAO{
 		Connection con = ConnectionUtil.getConnection();
 		System.out.println(sql);
 		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setInt(1,obj.BusNo);
-		pst.setInt(2, obj.amount);
+		pst.setInt(1,obj.getBusNo());
+		pst.setInt(2, obj.getAmount());
 		//pst.setTimestamp(3,java.sql.Timestamp.valueOf(obj.departureTime));
 		//pst.setTimestamp(4,java.sql.Timestamp.valueOf(obj.arrivalTime));
-		pst.setString(3, obj.departureTime);
-		pst.setString(4, obj.arrivalTime);
+		pst.setString(3, obj.getDepartureTime());
+		pst.setString(4, obj.getArrivalTime());
 		int row=pst.executeUpdate();
 		System.out.println(row);
 	}
@@ -43,10 +43,10 @@ public class BusTimingIplementation implements TimingDAO{
 		ResultSet rs=stmt.executeQuery(sql);
 		while(rs.next()) {
 			ListBusTiming obj = new ListBusTiming();
-			obj.BusNo=rs.getInt("bus_no");
-			obj.amount=rs.getInt("amount");
-			obj.departureTime=rs.getString("departure_time");
-			obj.arrivalTime=rs.getString("arraival_time");
+			obj.setBusNo(rs.getInt("bus_no"));
+			obj.setAmount(rs.getInt("amount"));
+			obj.setDepartureTime(rs.getString("departure_time"));
+			obj.setArrivalTime(rs.getString("arraival_time"));
 			List.add(obj);
 			
 				}

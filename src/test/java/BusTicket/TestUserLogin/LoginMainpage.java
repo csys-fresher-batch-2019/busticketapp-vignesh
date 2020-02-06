@@ -9,6 +9,7 @@ import busticket.buslist.TestSearchbus;
 import busticket.buslist.TestdeleteBuslist;
 import busticket.bustiming.TestaddTiming;
 import busticket.bustiming.TestdeleteBusTiming;
+import busticket.bustiming.TestlistBusTiming;
 import busticket.login.LoginDAOImplementation;
 import busticket.passenger.TestAddPassenger;
 import busticket.passenger.TestdeletePassenger;
@@ -117,6 +118,9 @@ public class LoginMainpage {
 				break;
 			case 8:
 				TestupdateNoOfTicketReservation.main(null);
+				break;
+			case 9:
+				TestlistBusTiming.main(null);
 				break;
 			default:
 				System.out.println("Choose Correct Option:");

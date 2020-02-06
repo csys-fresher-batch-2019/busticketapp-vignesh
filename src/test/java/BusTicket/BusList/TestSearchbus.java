@@ -19,7 +19,7 @@ public class TestSearchbus {
 		SourceTest= Busimpl.SourceStationlist(Source,Destination);
 	
 	     for (ListOfBuses p : SourceTest) {
-	    	 System.out.println(p.BusNo+"\t"+p.BusSource+"\t"+p.BusDestination+"\t\t"+p.BusName+"\t\t"+p.Class);
+	    	 System.out.println(p.getBusNo()+"\t"+p.getBusSource()+"\t"+p.getBusDestination()+"\t\t"+p.getBusName()+"\t\t"+p.getClazz());
 			
 		}
 	

@@ -1,29 +1,38 @@
 package com.chainsys.busticketapp.model;
 
 public class SeatAvailability {
-	private int BusNo;
-	private int AvailableSeats;
-	public int TotalSeats;
+	private int busNo;
 
 	public int getBusNo() {
-		return BusNo;
+		return busNo;
 	}
 
 	public void setBusNo(int busNo) {
-		BusNo = busNo;
+		this.busNo = busNo;
 	}
 
 	public int getAvailableSeats() {
-		return AvailableSeats;
+		return availableSeats;
 	}
 
 	public void setAvailableSeats(int availableSeats) {
-		AvailableSeats = availableSeats;
+		this.availableSeats = availableSeats;
 	}
+
+	public int getTotalSeats() {
+		return totalSeats;
+	}
+
+	public void setTotalSeats(int totalSeats) {
+		this.totalSeats = totalSeats;
+	}
+
+	private int availableSeats;
+	public int totalSeats;
 
 	@Override
 	public String toString() {
-		return "SeatAvailability [BusNo=" + BusNo + ", AvailableSeats=" + AvailableSeats + ", TotalSeats=" + TotalSeats
+		return "SeatAvailability [busNo=" + busNo + ", availableSeats=" + availableSeats + ", totalSeats=" + totalSeats
 				+ "]";
 	}
 
