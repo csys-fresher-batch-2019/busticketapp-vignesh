@@ -3,6 +3,7 @@ package com.chainsys.busticketapp.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,15 +60,6 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 			pst.setInt(1, busNo);
 			pst.executeUpdate();
-			// System.out.println(sql);
-			// Statement stmt=con.createStatement();
-			// int row=stmt.executeUpdate(sql);
-			// System.out.println(row);
-
-			// PreparedStatement pst1=con.prepareStatement(sql1);
-			// pst1.setInt(1, BusNo);
-			// pst1.executeUpdate();
-			// Statement stmt1=con.createStatement();
 			System.out.println(busNo + " Bus Details are delete successfully");
 		}catch (Exception e) {
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
@@ -97,7 +89,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		System.out.println(sql);
 		HashMap<String, Integer> obj = new HashMap<String, Integer>();
 		try (Connection con = ConnectionUtil.getConnection(); Statement stmt = con.createStatement();) {
-			ResultSet rs = stmt.executeQuery(sql);
+			try(ResultSet rs = stmt.executeQuery(sql);){
 
 			while (rs.next()) {
 				// System.out.println(""+rs.getString("bus_name"));
@@ -109,14 +101,18 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		} catch (Exception e) {
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
+		}
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		}
 		return obj;
 	}
 
 	public List<ListOfBuses> sourceStationlist(String busSource, String busDestination) throws Exception {
 		String sql = "select *from bus_list where bus_source=? and bus_destination=?";
 		List<ListOfBuses> source = new ArrayList<>();
-		try (Connection con = ConnectionUtil.getConnection();
-				PreparedStatement pst=con.prepareStatement(sql);){
+		try (Connection con = ConnectionUtil.getConnection();){
+				try(PreparedStatement pst=con.prepareStatement(sql);){
 			pst.setString(1, busSource);
 			pst.setString(2, busDestination);
 			try(ResultSet rs = pst.executeQuery();) {
@@ -131,11 +127,18 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 				source.add(p);
 			}
 				}
+			catch(SQLException e) {
+				throw new Exception("Unable to execute login query");
+			}
 		
-		}catch (Exception e) {
+		}
+		catch(SQLException e) {
+			throw new Exception("Unable to execute login query");
+			}
+		}
+		catch (Exception e) {
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
-
 		return source;
 	}
 
