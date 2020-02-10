@@ -7,7 +7,7 @@ import com.chainsys.busticketapp.model.ListReservation;
 
 public class TestgetBusNo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)throws Exception {
 		ReservationImplementation impl = new ReservationImplementation();
 		ListReservation obj=new ListReservation();
 		Scanner sc = new Scanner(System.in);

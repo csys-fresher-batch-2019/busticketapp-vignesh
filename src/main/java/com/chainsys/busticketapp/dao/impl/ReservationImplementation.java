@@ -54,11 +54,15 @@ public class ReservationImplementation implements ReservationDAO {
 	public void cancelReservationList(int ticketNo) throws Exception {
 		String sql = "delete from reserve where ticket_no=?";
 		System.out.println(sql);
-		try(Connection con = ConnectionUtil.getConnection();
-		PreparedStatement pst = con.prepareStatement(sql);){
+		try(Connection con = ConnectionUtil.getConnection();){
+		try(PreparedStatement pst = con.prepareStatement(sql);){
 		pst.setInt(1, ticketNo);
 			int row = pst.executeUpdate();
 		System.out.println(row);
+	}
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		}
 	}
 		catch (Exception e) {
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
