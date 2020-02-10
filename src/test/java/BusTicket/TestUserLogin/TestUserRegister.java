@@ -2,16 +2,15 @@ package busticket.testuserlogin;
 
 import java.util.Scanner;
 
-import com.chainsys.busticketapp.model.UserLogin;
-
-import busticket.userlogin.UserLoginDAOImplementation;
+import com.chainsys.busticketapp.dao.impl.UserRegistrationDAOImplementation;
+import com.chainsys.busticketapp.model.UserRegistration;
 
 public class TestUserRegister {
 
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
-		UserLoginDAOImplementation impl = new UserLoginDAOImplementation();
-		UserLogin obj = new UserLogin();
+		UserRegistrationDAOImplementation impl = new UserRegistrationDAOImplementation();
+		UserRegistration obj = new UserRegistration();
 		System.out.println("Ener user name:");
 		obj.setUserName(sc.next());
 		System.out.println("Enter the emailId:");

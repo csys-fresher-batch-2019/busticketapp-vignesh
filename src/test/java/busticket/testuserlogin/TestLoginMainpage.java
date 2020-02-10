@@ -2,15 +2,16 @@ package busticket.testuserlogin;
 
 import java.util.Scanner;
 
+import com.chainsys.busticketapp.dao.impl.LoginDAOImplementation;
+
 import busticket.buslist.TestAddBusList;
-import busticket.buslist.TestNoOfBuses;
+import busticket.buslist.TestCountBuses;
 import busticket.buslist.TestNoOfBuslist;
 import busticket.buslist.TestSearchbus;
 import busticket.buslist.TestdeleteBuslist;
 import busticket.bustiming.TestaddTiming;
 import busticket.bustiming.TestdeleteBusTiming;
 import busticket.bustiming.TestlistBusTiming;
-import busticket.login.LoginDAOImplementation;
 import busticket.passenger.TestAddPassenger;
 import busticket.passenger.TestdeletePassenger;
 import busticket.passenger.TestupdatePassenger;
@@ -19,10 +20,11 @@ import busticket.reservation.TestResrvationAllList;
 import busticket.reservation.TestaddReservationList;
 import busticket.reservation.TestupdateNoOfTicketReservation;
 import busticket.seatavailability.TestAvailableSeats;
+import busticket.seatavailability.TestSeatAvailableBus;
 import busticket.seatavailability.TestaddSeatAvailability;
 import busticket.seatavailability.TestupdateAvailableSeats;
 
-public class LoginMainpage {
+public class TestLoginMainpage {
 
 	public static void main(String[] args) throws Exception {
 		admin();
@@ -91,7 +93,7 @@ public class LoginMainpage {
 			System.out.println(">>>>LOGIN SUCESSFULL<<<<");
 			// view bus details
 			System.out.println(
-					"1.No_Of_BusList:\n2.No_Of_Buses:\n3.Source And DestinationList:\n4.Available Seats:\n5:Add Passenger Details:\n6.Add ReservationList:\n7.Update PassengerDetails:\n8.Update No_Of_Ticket:");
+					"1.No_Of_BusList:\n2.No_Of_Buses:\n3.Source And DestinationList:\n4.Available Seats:\n5:Add Passenger Details:\n6.Add ReservationList:\n7.Update PassengerDetails:\n8.Update No_Of_Ticket:\n9.ListBusTiming:\n10.Available seats Source and destination:");
 			int n = sc.nextInt();
 			switch (n) {
 			case 1:
@@ -99,7 +101,7 @@ public class LoginMainpage {
 				TestNoOfBuslist.main(null);
 				break;
 			case 2:
-				TestNoOfBuses.main(null);
+				TestCountBuses.main(null);
 				break;
 			case 3:
 				TestSearchbus.main(null);
@@ -121,6 +123,9 @@ public class LoginMainpage {
 				break;
 			case 9:
 				TestlistBusTiming.main(null);
+				break;
+			case 10:
+				TestSeatAvailableBus.main(null);
 				break;
 			default:
 				System.out.println("Choose Correct Option:");

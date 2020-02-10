@@ -2,6 +2,8 @@ package busticket.bustiming;
 
 import java.util.Scanner;
 
+import com.chainsys.busticketapp.dao.impl.BusTimingIplementation;
+
 public class TestdeleteBusTiming {
 
 	public static void main(String[] args) throws Exception {

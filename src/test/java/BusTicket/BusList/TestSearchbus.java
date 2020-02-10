@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.chainsys.busticketapp.dao.impl.BusTicketManagerImplimentation;
 import com.chainsys.busticketapp.model.ListOfBuses;
 
 public class TestSearchbus {
@@ -19,8 +20,8 @@ public class TestSearchbus {
 		sourceTest = busimpl.sourceStationlist(source, destination);
 
 		for (ListOfBuses p : sourceTest) {
-			System.out.println(p.getBusNo() + "\t" + p.getBusSource() + "\t" + p.getBusDestination() + "\t\t"
-					+ p.getBusName() + "\t\t" + p.getClazz());
+			System.out.println(p.getBusNo() + "\t" + p.getBusSource() + "\t" + p.getBusDestination() + "\t"
+					+ p.getBusName() + "\t" + p.getClazz());
 
 		}
 

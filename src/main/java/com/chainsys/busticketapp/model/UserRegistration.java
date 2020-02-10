@@ -1,6 +1,6 @@
 package com.chainsys.busticketapp.model;
 
-public class UserLogin {
+public class UserRegistration {
 	private String UserName;
 
 	public String getUserName() {

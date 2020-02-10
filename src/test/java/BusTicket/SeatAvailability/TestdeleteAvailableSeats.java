@@ -2,6 +2,8 @@ package busticket.seatavailability;
 
 import java.util.Scanner;
 
+import com.chainsys.busticketapp.dao.impl.SeatAvailabilityimplementation;
+
 public class TestdeleteAvailableSeats {
 
 	public static void main(String[] args) throws Exception {

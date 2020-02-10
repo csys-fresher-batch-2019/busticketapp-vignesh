@@ -1,4 +1,4 @@
-package busticket.bustiming;
+package com.chainsys.busticketapp.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +14,9 @@ import com.chainsys.busticketapp.util.ConnectionUtil;
 public class BusTimingIplementation implements TimingDAO{
 	public void addBusTiming(ListBusTiming obj) throws Exception {
 		String sql="insert into bus_time(bus_no,amount,departure_time,arraival_time) values(?,?,?,?)";
-		Connection con = ConnectionUtil.getConnection();
 		System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
+		try(Connection con = ConnectionUtil.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);){
 		pst.setInt(1,obj.getBusNo());
 		pst.setInt(2, obj.getAmount());
 		//pst.setTimestamp(3,java.sql.Timestamp.valueOf(obj.departureTime));
@@ -26,21 +26,28 @@ public class BusTimingIplementation implements TimingDAO{
 		int row=pst.executeUpdate();
 		System.out.println(row);
 	}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public void deleteBusTiming(int busNo) throws Exception{
-		String sql="delete from bus_time where bus_no="+busNo;
+		String sql="delete from bus_time where bus_no=?";
 		System.out.println(sql);
-		Connection con = ConnectionUtil.getConnection();
-		Statement stmt=con.createStatement();
-		int row=stmt.executeUpdate(sql);
+		try(Connection con = ConnectionUtil.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);){
+			pst.setInt(1,busNo);
+		int row=pst.executeUpdate();
 		System.out.println(row);		
+	}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public List<ListBusTiming> bustimeDetails() throws Exception{
 		String sql="select * from bus_time";
 		System.out.println(sql);
-		Connection con = ConnectionUtil.getConnection();
-		Statement stmt=con.createStatement();
-		ArrayList<ListBusTiming> List=new ArrayList<ListBusTiming>();
-		ResultSet rs=stmt.executeQuery(sql);
+		ArrayList<ListBusTiming> List=new ArrayList<>();
+		try(Connection con = ConnectionUtil.getConnection();Statement stmt=con.createStatement();ResultSet rs=stmt.executeQuery(sql);){
 		while(rs.next()) {
 			ListBusTiming obj = new ListBusTiming();
 			obj.setBusNo(rs.getInt("bus_no"));
@@ -50,6 +57,10 @@ public class BusTimingIplementation implements TimingDAO{
 			List.add(obj);
 			
 				}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		return List;
 		
 	}

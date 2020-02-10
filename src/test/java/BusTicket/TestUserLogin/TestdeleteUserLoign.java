@@ -2,7 +2,7 @@ package busticket.testuserlogin;
 
 import java.util.Scanner;
 
-import busticket.userlogin.UserLoginDAOImplementation;
+import com.chainsys.busticketapp.dao.impl.UserLoginDAOImplementation;
 
 public class TestdeleteUserLoign {
 

@@ -1,8 +1,9 @@
 package com.chainsys.busticketapp.dao;
 
+import com.chainsys.busticketapp.model.Passenger;
+
 public interface PassengerDAO {
-	public void addPassengerlist(String passengerName, int passengerAge, String passengerGender, long passengerContact)
-			throws Exception;
+	public void addPassengerlist(Passenger obj)throws Exception;
 
 	public void deletePassengerlist(int passengerId) throws Exception;
 

@@ -1,6 +1,6 @@
 package com.chainsys.busticketapp.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.chainsys.busticketapp.model.SeatAvailability;
 
@@ -10,7 +10,8 @@ public interface SeatAvailabilityDAO {
 	public void deleteAvailableSeatlist(int busNo) throws Exception;
 
 	public void updateAvailableSeatlist(int availableSeats, int busNo) throws Exception;
-
-	List<SeatAvailability> availableSeatDetails(SeatAvailability obj) throws Exception;
-
+	
+	public int availableSeatDetails(int busNo) throws Exception;
+	
+	public ArrayList<SeatAvailability> availablebusseats(String source, String destination) throws Exception;
 }

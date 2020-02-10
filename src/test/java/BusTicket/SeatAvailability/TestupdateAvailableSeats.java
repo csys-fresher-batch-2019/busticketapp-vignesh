@@ -2,6 +2,7 @@ package busticket.seatavailability;
 
 import java.util.Scanner;
 
+import com.chainsys.busticketapp.dao.impl.SeatAvailabilityimplementation;
 import com.chainsys.busticketapp.model.SeatAvailability;
 
 public class TestupdateAvailableSeats {

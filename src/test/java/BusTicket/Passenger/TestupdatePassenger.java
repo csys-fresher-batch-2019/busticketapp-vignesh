@@ -2,6 +2,8 @@ package busticket.passenger;
 
 import java.util.Scanner;
 
+import com.chainsys.busticketapp.dao.impl.PassengerImplementation;
+
 public class TestupdatePassenger {
 
 	public static void main(String[] args) throws Exception {

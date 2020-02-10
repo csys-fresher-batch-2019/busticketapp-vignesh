@@ -1,6 +1,8 @@
 package busticket.buslist;
 
-public class TestNoOfBuses {
+import com.chainsys.busticketapp.dao.impl.BusTicketManagerImplimentation;
+
+public class TestCountBuses {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub

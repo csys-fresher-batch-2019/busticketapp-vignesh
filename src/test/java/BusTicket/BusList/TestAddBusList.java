@@ -1,5 +1,7 @@
 package busticket.buslist;
 import java.util.Scanner;
+
+import com.chainsys.busticketapp.dao.impl.BusTicketManagerImplimentation;
 //TestBusTicket
 public class TestAddBusList {
 
@@ -19,7 +21,7 @@ public class TestAddBusList {
 		String busDestination = sc.next();
 		
 		System.out.println("Enter the busClass:");
-		String clazz = sc.next();
+		String clazz =sc.next();
 		
 		BusTicketManagerImplimentation busimpl=new BusTicketManagerImplimentation();
 		//Busimpl.addBuslist(1244,"abcd","kovai","madurai","sleeper");
