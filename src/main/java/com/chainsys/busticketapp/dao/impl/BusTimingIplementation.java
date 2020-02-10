@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chainsys.busticketapp.DBException;
+import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.TimingDAO;
 import com.chainsys.busticketapp.model.ListBusTiming;
 import com.chainsys.busticketapp.util.ConnectionUtil;
@@ -26,8 +28,8 @@ public class BusTimingIplementation implements TimingDAO{
 		int row=pst.executeUpdate();
 		System.out.println(row);
 	}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 	}
 	public void deleteBusTiming(int busNo) throws Exception{
@@ -39,8 +41,8 @@ public class BusTimingIplementation implements TimingDAO{
 		int row=pst.executeUpdate();
 		System.out.println(row);		
 	}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 	}
 	public List<ListBusTiming> bustimeDetails() throws Exception{
@@ -58,8 +60,8 @@ public class BusTimingIplementation implements TimingDAO{
 			
 				}
 		}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 		return List;
 		

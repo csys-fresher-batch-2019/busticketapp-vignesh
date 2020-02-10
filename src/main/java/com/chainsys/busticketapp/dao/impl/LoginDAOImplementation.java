@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.chainsys.busticketapp.DBException;
+import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.LoginDAO;
 import com.chainsys.busticketapp.util.ConnectionUtil;
 
@@ -24,9 +26,12 @@ public class LoginDAOImplementation implements LoginDAO {
 					valid = true;
 				}
 			}
-		}
 		catch(SQLException e) {
 			throw new Exception("Unable to execute login query");
+		}
+		}
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 		return valid;
 	}
@@ -46,9 +51,12 @@ public class LoginDAOImplementation implements LoginDAO {
 				valid = true;
 				}
 			}
-		}
 		catch(SQLException e) {
 			throw new Exception("Unable to execute login query");
+		}
+		}
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 		return valid;
 	}

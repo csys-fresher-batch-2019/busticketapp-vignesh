@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.chainsys.busticketapp.DBException;
+import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.UserRegistrationDAO;
 import com.chainsys.busticketapp.model.UserRegistration;
 import com.chainsys.busticketapp.util.ConnectionUtil;
@@ -14,8 +16,8 @@ public class UserRegistrationDAOImplementation implements UserRegistrationDAO {
 	public void newUserRegister(UserRegistration obj) throws Exception {
 		String sql = "insert into UserRegister(name,Email_id,password,contact,user_id) values(?,?,?,?,?)";
 		System.out.println(sql);
-		try(Connection con = ConnectionUtil.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql);){
+		try(Connection con = ConnectionUtil.getConnection();){
+				try(PreparedStatement pst = con.prepareStatement(sql);){
 		pst.setString(1, obj.getUserName());
 		pst.setString(2, obj.getEmailId());
 		pst.setString(3, obj.getPassword());
@@ -28,11 +30,14 @@ public class UserRegistrationDAOImplementation implements UserRegistrationDAO {
 			throw new Exception("Unable to execute login query");
 		}
 	}
-
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		}
+	}
 	public void removeUser(int userId) throws Exception {
 		String sql = "delete from UserRegister where user_id=?";
-		try(Connection con = ConnectionUtil.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql);){
+		try(Connection con = ConnectionUtil.getConnection();){
+			try(PreparedStatement pst = con.prepareStatement(sql);){
 			pst.setInt(1, userId);
 			int row = pst.executeUpdate();
 		System.out.println(row);
@@ -42,4 +47,8 @@ public class UserRegistrationDAOImplementation implements UserRegistrationDAO {
 			throw new Exception("Unable to execute login query");
 		}
 	}
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		}
+}
 }

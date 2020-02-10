@@ -3,18 +3,29 @@ package com.chainsys.busticketapp.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.chainsys.busticketapp.DBException;
+import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.BusTicketDAO;
 import com.chainsys.busticketapp.model.ListOfBuses;
 import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class BusTicketManagerImplimentation implements BusTicketDAO {
-	public int busCount;
+	private int busCount;
+
+	public int getBusCount() {
+		return busCount;
+	}
+
+
+	public void setBusCount(int busCount) {
+		this.busCount = busCount;
+	}
+
 
 	public void addBuslist(int busNo, String busName, String busSource, String busDestination, String clazz)
 			throws Exception {
@@ -32,10 +43,11 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			int row = pst.executeUpdate();
 			System.out.println(row);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
-	}
+		}
+	
 
 	public void deleteBuslist(int busNo) throws Exception {
 		String sql1 = "delete from seat_availability where bus_no=?";
@@ -57,8 +69,8 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			// pst1.executeUpdate();
 			// Statement stmt1=con.createStatement();
 			System.out.println(busNo + " Bus Details are delete successfully");
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 	}
 
@@ -72,9 +84,9 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			 busCount = rs.getInt("busCount");
 		}
 		}
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		}
 		
 		return busCount;
 		
@@ -95,7 +107,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 		return obj;
 	}
@@ -120,8 +132,8 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			}
 				}
 		
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 
 		return source;
