@@ -1,18 +1,16 @@
 package busticket.bustiming;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Scanner;
 
 import com.chainsys.busticketapp.dao.impl.BusTimingIplementation;
-import com.chainsys.busticketapp.model.ListBusTiming;
+import com.chainsys.busticketapp.model.BusTiming;
 
 public class TestaddTiming {
 
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		BusTimingIplementation timeimpl= new BusTimingIplementation();
-		ListBusTiming obj = new ListBusTiming();
+		BusTiming obj = new BusTiming();
 		System.out.println("Enter the BusNo:");
 		obj.setBusNo(sc.nextInt());
 		System.out.println("Enter the Bus Amount:");

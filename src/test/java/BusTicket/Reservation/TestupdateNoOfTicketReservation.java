@@ -16,7 +16,7 @@ public class TestupdateNoOfTicketReservation {
 		obj.setTicketNo(sc.nextInt());
 		System.out.println("Enter PassengerId:");
 		obj.setPassengerId(sc.nextInt());
-		System.out.println("Update NoOfTicket:");
+		System.out.println("Enter NoOfTicket to cancel:");
 		obj.setNoOfTicket(sc.nextInt());
 		impl.updateNoOfTicket(obj.getTicketNo(), obj.getPassengerId(), obj.getNoOfTicket());
 	}

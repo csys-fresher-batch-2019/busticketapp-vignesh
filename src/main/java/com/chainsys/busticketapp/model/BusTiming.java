@@ -1,6 +1,6 @@
 package com.chainsys.busticketapp.model;
 
-public class ListBusTiming {
+public class BusTiming {
 
 	public int getBusNo() {
 		return busNo;

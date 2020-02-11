@@ -10,11 +10,11 @@ import java.util.List;
 import com.chainsys.busticketapp.DBException;
 import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.TimingDAO;
-import com.chainsys.busticketapp.model.ListBusTiming;
+import com.chainsys.busticketapp.model.BusTiming;
 import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class BusTimingIplementation implements TimingDAO{
-	public void addBusTiming(ListBusTiming obj) throws Exception {
+	public void addBusTiming(BusTiming obj) throws Exception {
 		String sql="insert into bus_time(bus_no,amount,departure_time,arraival_time) values(?,?,?,?)";
 		System.out.println(sql);
 		try(Connection con = ConnectionUtil.getConnection();
@@ -45,20 +45,20 @@ public class BusTimingIplementation implements TimingDAO{
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 	}
-	public List<ListBusTiming> bustimeDetails() throws Exception{
+	public List<BusTiming> bustimeDetails() throws Exception{
 		String sql="select * from bus_time";
 		System.out.println(sql);
-		ArrayList<ListBusTiming> List=new ArrayList<>();
+		ArrayList<BusTiming> List=new ArrayList<>();
 		try(Connection con = ConnectionUtil.getConnection();Statement stmt=con.createStatement();ResultSet rs=stmt.executeQuery(sql);){
 		while(rs.next()) {
-			ListBusTiming obj = new ListBusTiming();
+			BusTiming obj = new BusTiming();
 			obj.setBusNo(rs.getInt("bus_no"));
 			obj.setAmount(rs.getInt("amount"));
 			obj.setDepartureTime(rs.getString("departure_time"));
 			obj.setArrivalTime(rs.getString("arraival_time"));
 			List.add(obj);
 			
-				}
+		}
 		}
 		catch (Exception e) {
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
@@ -66,6 +66,29 @@ public class BusTimingIplementation implements TimingDAO{
 		return List;
 		
 	}
+	
+	public BusTiming bustimes(int busNo) throws Exception{
+		String sql="select * from bus_time where bus_no="+busNo;
+		BusTiming obj = null;
+		System.out.println(sql);
+		//ArrayList<BusTiming> List=new ArrayList<>();
+		try(Connection con = ConnectionUtil.getConnection();Statement stmt=con.createStatement();ResultSet rs=stmt.executeQuery(sql);){
+		if(rs.next()) {
+			obj = new BusTiming();
+			obj.setBusNo(rs.getInt("bus_no"));
+			obj.setAmount(rs.getInt("amount"));
+			obj.setDepartureTime(rs.getString("departure_time"));
+			obj.setArrivalTime(rs.getString("arraival_time"));
+			//List.add(obj);
+			//System.out.println(obj);
+				}
+		}
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		}
+		return obj;
 		
+	}
+	
 
 }

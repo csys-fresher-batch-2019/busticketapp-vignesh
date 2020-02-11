@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import com.chainsys.busticketapp.DBException;
@@ -29,20 +30,20 @@ public class ReservationImplementation implements ReservationDAO {
 		 * Journydate=Date.valueOf(ld); pst.setDate(4, Journydate); int
 		 * row=pst.executeUpdate(); System.out.println(row);
 		 */
-		try(CallableStatement stmt = con.prepareCall("{call ticket_booking(?,?,?)}");){
+		try(CallableStatement stmt = con.prepareCall("{call ticket_booking(?,?,?,?)}");){
 		stmt.setInt(1, obj.getBusNo());
 		System.out.println(obj.getBusNo());
 		stmt.setInt(2, obj.getPassengerId());
 		System.out.println(obj.getPassengerId());
 		stmt.setInt(3, obj.getNoOfTicket());
 		System.out.println(obj.getNoOfTicket());
-		// LocalDate ld=LocalDate.parse(obj.date);
-		// Date Journydate=Date.valueOf(ld);
-		// stmt.setDate(4, Journydate);
-		// System.out.println(Journydate);
-		boolean b = stmt.execute();
+		stmt.registerOutParameter(4, Types.INTEGER);
+		stmt.executeUpdate();
+		int result=stmt.getInt(4);
+		System.out.println(result);
 	}
 		catch (Exception e) {
+			e.printStackTrace();
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
 		}
@@ -116,31 +117,27 @@ public class ReservationImplementation implements ReservationDAO {
 		}
 		return busid;
 	}
+	
 
 	public void updateNoOfTicket(int ticketNo, int passengerId, int noOfTicket) throws Exception {
 		int busid = getBusNo(ticketNo);
 
-		String sql = "update reserve set no_of_ticket=? where ticket_no=? and pas_id=?";
-		System.out.println(sql);
+		//String sql = "update reserve set no_of_ticket=? where ticket_no=? and pas_id=?";
+		//System.out.println(sql);
 		
-		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
-			pst.setInt(2, ticketNo);
-			pst.setInt(3, passengerId);
-			pst.setInt(1, noOfTicket);
-			int row = pst.executeUpdate();
-			String sql2 = "update seat_availability set available_seats= available_seats-" + noOfTicket
+		try (Connection con = ConnectionUtil.getConnection(); ) {
+			String sql2 = "update seat_availability set available_seats= available_seats+" + noOfTicket
 					+ " where bus_no=" + busid;
 			try(Statement stmt = con.createStatement();){
 				int row1 = stmt.executeUpdate(sql2);
-				String sql3 = "update reserve set total_amount = (" + noOfTicket
-					+ "*(select amount from bus_time where bus_no=?)),no_of_ticket="+noOfTicket+" where bus_no=? and pas_id=?";
+				String sql3 = "update reserve r set total_amount = ( (no_of_ticket - ?)*(select amount from bus_time where bus_no=r.bus_no)),"
+						+ "no_of_ticket=no_of_ticket- ? where ticket_no = ?";
 			try(PreparedStatement pst1 = con.prepareStatement(sql3);){
-				pst1.setInt(1, busid);
-				pst1.setInt(2, busid);
-				pst1.setInt(3, passengerId);
+				pst1.setInt(1, noOfTicket);
+				pst1.setInt(2, noOfTicket);
+				pst1.setInt(3, ticketNo);
 				System.out.println(sql3);
 				int row2 = pst1.executeUpdate();
-				System.out.println(row);
 				System.out.println(row1);
 				System.out.println(row2);
 		}
@@ -158,4 +155,6 @@ public class ReservationImplementation implements ReservationDAO {
 		}
 
 	}
+	
+	
 }
