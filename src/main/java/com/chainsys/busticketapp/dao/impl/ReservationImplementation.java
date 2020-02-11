@@ -43,8 +43,7 @@ public class ReservationImplementation implements ReservationDAO {
 		System.out.println(result);
 	}
 		catch (Exception e) {
-			e.printStackTrace();
-			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+			throw new DBException(ErrorMessages.NO_DATA_FOUND);
 		}
 		}
 		catch (Exception e) {
@@ -62,7 +61,7 @@ public class ReservationImplementation implements ReservationDAO {
 		System.out.println(row);
 	}
 		catch (Exception e) {
-			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+			throw new DBException(ErrorMessages.NO_DATA_FOUND);
 		}
 	}
 		catch (Exception e) {
