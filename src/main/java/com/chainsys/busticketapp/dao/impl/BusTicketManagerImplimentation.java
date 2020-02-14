@@ -12,6 +12,7 @@ import java.util.List;
 import com.chainsys.busticketapp.DBException;
 import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.BusTicketDAO;
+import com.chainsys.busticketapp.logger.Logger;
 import com.chainsys.busticketapp.model.ListOfBuses;
 import com.chainsys.busticketapp.util.ConnectionUtil;
 
@@ -22,12 +23,10 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		return busCount;
 	}
 
-
 	public void setBusCount(int busCount) {
 		this.busCount = busCount;
 	}
-
-
+	Logger logger=Logger.getInstance();
 	public void addBuslist(int busNo, String busName, String busSource, String busDestination, String clazz)
 			throws Exception {
 		String sql = "insert into bus_list (bus_no,bus_name,bus_source,bus_destination,class)values(?,?,?,?,?)";
@@ -35,7 +34,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		try (Connection con = ConnectionUtil.getConnection();){
 				try(PreparedStatement pst = con.prepareStatement(sql);) {
 	
-		System.out.println(sql);
+		logger.debug(sql);
 
 			pst.setInt(1, busNo);
 			pst.setString(2, busName);
@@ -43,10 +42,10 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			pst.setString(4, busDestination);
 			pst.setString(5, clazz);
 			int row = pst.executeUpdate();
-			System.out.println(row);
+			logger.info(row);
 
 		}catch (Exception e) {
-			throw new DBException(ErrorMessages.VERIFICATION_FAILED);
+			throw new DBException(ErrorMessages.ADMIN_LOGIN_FAILED);
 		}
 		}
 				catch (Exception e) {
@@ -57,9 +56,23 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 
 	public void deleteBuslist(int busNo) throws Exception {
 		String sql1 = "delete from seat_availability where bus_no=?";
-		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement pst = con.prepareStatement(sql1);) {
+		try (Connection con = ConnectionUtil.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql1);) {
 			pst.setInt(1, busNo);
 			pst.executeUpdate();
+		}
+		catch (Exception e) {
+			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		}
+		String sql2="delete from bus_time where bus_no=?";
+		try (Connection con = ConnectionUtil.getConnection();){
+				try(PreparedStatement pst = con.prepareStatement(sql2);) {
+			pst.setInt(1, busNo);
+			pst.executeUpdate();
+		}
+				catch(SQLException e) {
+					throw new Exception("unable to execute preparedstatement query");
+				}
 		}
 		catch (Exception e) {
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
@@ -68,7 +81,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 			pst.setInt(1, busNo);
 			pst.executeUpdate();
-			System.out.println(busNo + " Bus Details are delete successfully");
+			logger.info(busNo + " Bus Details are delete successfully");
 		}catch (Exception e) {
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
 		}
@@ -76,7 +89,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 
 	public int noOfBuses() throws Exception {
 		String sql = "select count(*) as busCount  from bus_list";
-		System.out.println(sql);
+		logger.debug(sql);
 		
 		try (Connection con = ConnectionUtil.getConnection();){ 
 				try(Statement stmt = con.createStatement();){
@@ -89,8 +102,8 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		catch (Exception e) {
 			throw new DBException(ErrorMessages.NO_DATA_FOUND);
 		}
-				}catch (Exception e) {
-					throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+				}catch(SQLException e) {
+					throw new Exception("Unable to execute query");
 				}
 		}
 		catch (Exception e) {
@@ -103,7 +116,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 	//String sql = "select bus_name,bl.bus_no, bt.time from bus_list bl, bus_timing bt where bl.bus_no = bt.bus_no";
 	public HashMap<String, Integer> noOfBuslist() throws Exception {
 		String sql = "select bus_name,bus_no from bus_list";
-		System.out.println(sql);
+		logger.debug(sql);
 		HashMap<String, Integer> obj = new HashMap<String, Integer>();
 		try (Connection con = ConnectionUtil.getConnection(); Statement stmt = con.createStatement();) {
 			try(ResultSet rs = stmt.executeQuery(sql);){
@@ -115,8 +128,8 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 				obj.put(busName, busNo);
 			}
 
-		} catch (Exception e) {
-			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		} catch(SQLException e) {
+			throw new Exception("Unable to execute resultset query");
 		}
 		}
 		catch (Exception e) {
@@ -125,7 +138,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 		return obj;
 	}
 
-	public List<ListOfBuses> sourceStationlist(String busSource, String busDestination) throws Exception {
+	public List<ListOfBuses> sourceStationlist(String busSource, String busDestination) throws DBException {
 		String sql = "select *from bus_list where bus_source=? and bus_destination=?";
 		List<ListOfBuses> source = new ArrayList<>();
 		try (Connection con = ConnectionUtil.getConnection();){
@@ -145,12 +158,12 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			}
 				}
 			catch(SQLException e) {
-				throw new Exception("Unable to execute query");
+				throw new Exception("Unable to execute resultset query");
 			}
 		
 		}
 		catch(SQLException e) {
-			throw new Exception("Unable to execute query");
+			throw new Exception("Unable to execute preparedstatement query");
 			}
 		}
 		catch (Exception e) {

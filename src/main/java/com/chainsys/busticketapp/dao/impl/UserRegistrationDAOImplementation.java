@@ -7,15 +7,16 @@ import java.sql.SQLException;
 import com.chainsys.busticketapp.DBException;
 import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.UserRegistrationDAO;
+import com.chainsys.busticketapp.logger.Logger;
 import com.chainsys.busticketapp.model.UserRegistration;
 import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class UserRegistrationDAOImplementation implements UserRegistrationDAO {
 	UserRegistration obj = new UserRegistration();
-
+	Logger logger=Logger.getInstance();
 	public void newUserRegister(UserRegistration obj) throws Exception {
 		String sql = "insert into UserRegister(name,Email_id,password,contact,user_id) values(?,?,?,?,?)";
-		System.out.println(sql);
+		logger.debug(sql);
 		try(Connection con = ConnectionUtil.getConnection();){
 				try(PreparedStatement pst = con.prepareStatement(sql);){
 		pst.setString(1, obj.getUserName());
@@ -24,7 +25,7 @@ public class UserRegistrationDAOImplementation implements UserRegistrationDAO {
 		pst.setLong(4, obj.getContactNumber());
 		pst.setInt(5, obj.getUserId());
 		int row = pst.executeUpdate();
-		System.out.println(row);
+		logger.info(row);
 		}
 		catch(SQLException e) {
 			throw new Exception("Unable to execute login query");
@@ -40,7 +41,7 @@ public class UserRegistrationDAOImplementation implements UserRegistrationDAO {
 			try(PreparedStatement pst = con.prepareStatement(sql);){
 			pst.setInt(1, userId);
 			int row = pst.executeUpdate();
-		System.out.println(row);
+			logger.info(row);
 
 	}
 		catch(SQLException e) {

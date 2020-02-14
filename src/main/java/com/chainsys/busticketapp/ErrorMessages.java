@@ -3,23 +3,26 @@ package com.chainsys.busticketapp;
 public class ErrorMessages {
 	
 
-		public static final String PIN_NOT_UPDATED
-		= "Pin number not updated";
+		public static final String INVALID_PHONE_NO
+		= "Need specified length ";
 
 		public static final String CONNECTION_FAILURE
 		="ESTABLISHING CONNECTION FAILED";
 
-		public static final String VERIFICATION_FAILED
+		public static final String ADMIN_LOGIN_FAILED
 		="Verification Failed";
-
+		
+		public static final String USER_LOGIN_FAILED
+		="Verification Failed";
+		
 		public static final String NO_DATA_FOUND
 		="NO DATA FOUND";
 
-		public static final String INVALID_COLUMN_INDEX
-		="INVALID COLUMN INDEX";
+		public static final String INORRECT_VALUE
+		="Incorrect value";
 
-		public static final String INVALID_PIN
-		="Invalid pin";
+		public static final String INVALID_PASSWORD
+		="Invalid password";
 		}
 
 

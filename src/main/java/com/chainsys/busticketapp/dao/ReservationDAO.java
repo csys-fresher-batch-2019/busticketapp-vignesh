@@ -6,6 +6,7 @@ import com.chainsys.busticketapp.DBException;
 import com.chainsys.busticketapp.model.ListReservation;
 
 public interface ReservationDAO {
+	
 	void addReservationList(ListReservation obj) throws Exception;
 
 	void cancelReservationList(int busNo) throws Exception;

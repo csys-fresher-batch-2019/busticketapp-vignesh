@@ -2,6 +2,8 @@ package busticket.testuserlogin;
 
 import java.util.Scanner;
 
+import com.chainsys.busticketapp.DBException;
+import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.impl.LoginDAOImplementation;
 
 import busticket.buslist.TestAddBusList;
@@ -83,13 +85,13 @@ public class TestLoginMainpage {
 	}
 
 	public static void user() throws Exception {
-		System.out.println("Enter UserName:");
+		System.out.println("Enter EmailId:");
 		Scanner sc = new Scanner(System.in);
-		String name = sc.next();
+		String userName = sc.next();
 		System.out.println("Enter Password:");
 		String pass = sc.next();
 		LoginDAOImplementation com = new LoginDAOImplementation();
-		if (com.user(name, pass)) {
+		if (com.user(userName, pass)) {
 			System.out.println(">>>>LOGIN SUCESSFULL<<<<");
 			// view bus details
 			System.out.println(
@@ -133,7 +135,8 @@ public class TestLoginMainpage {
 			}
 
 		} else {
-			System.out.println("--------LOGIN FAILED---------");
+			//System.out.println("--------LOGIN FAILED---------");
+			throw new DBException(ErrorMessages.USER_LOGIN_FAILED);
 		}
 
 	}

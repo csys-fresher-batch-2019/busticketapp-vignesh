@@ -3,6 +3,7 @@ package com.chainsys.busticketapp.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.chainsys.busticketapp.DBException;
 import com.chainsys.busticketapp.model.ListOfBuses;
 
 public interface BusTicketDAO {
@@ -15,5 +16,6 @@ public interface BusTicketDAO {
 
 	HashMap<String, Integer> noOfBuslist() throws Exception;
 
-	public List<ListOfBuses> sourceStationlist(String busSource, String busDestination) throws Exception;
+	public List<ListOfBuses> sourceStationlist(String busSource, String busDestination) throws DBException;
 }
+

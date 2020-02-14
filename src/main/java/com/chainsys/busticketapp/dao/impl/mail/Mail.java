@@ -35,12 +35,12 @@ public class Mail {
         {    
         	MimeMessage message = new MimeMessage(session);    
         	message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
-        	message.setSubject(sub);    
+        	message.setSubject(sub);  
+        	
         	BodyPart messageBodyPart1 = new MimeBodyPart();  
-        	messageBodyPart1.setText("Welcome, From Busticketbooking");  
-             
+        	messageBodyPart1.setText("Welcome, \nFrom Busticketbooking");  
         	BodyPart messageBodyPart2 = new MimeBodyPart(); 
-        	messageBodyPart2.setText("\nPassenger id:, \n \t\t "+id);
+        	messageBodyPart2.setText("\nPassenger id: \t\t "+id);
         	BodyPart messageBodyPart3 = new MimeBodyPart(); 
         	messageBodyPart3.setText("\n\t\tYour  ticket was booked ");
         	BodyPart messageBodyPart4 = new MimeBodyPart(); 
@@ -65,7 +65,7 @@ public class Mail {
         	System.out.println("message sent successfully");    
         }
         catch (Exception e) {
-			throw new DBException(ErrorMessages.VERIFICATION_FAILED);
+			throw new DBException(ErrorMessages.ADMIN_LOGIN_FAILED);
 		}
 	}  
 }

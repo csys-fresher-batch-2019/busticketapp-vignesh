@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.chainsys.busticketapp.model.SeatAvailability;
 
 public interface SeatAvailabilityDAO {
+	
 	public void addAvailableSeatlist(SeatAvailability obj) throws Exception;
 
 	public void deleteAvailableSeatlist(int busNo) throws Exception;

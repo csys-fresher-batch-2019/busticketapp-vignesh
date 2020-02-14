@@ -9,20 +9,22 @@ import java.util.ArrayList;
 import com.chainsys.busticketapp.DBException;
 import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.SeatAvailabilityDAO;
+import com.chainsys.busticketapp.logger.Logger;
 import com.chainsys.busticketapp.model.SeatAvailability;
 import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
+	Logger logger=Logger.getInstance();
 	public void addAvailableSeatlist(SeatAvailability obj) throws Exception {
 		String sql = "insert into seat_availability(bus_no,available_seats,total_seats) values(?,?,?)";
-		System.out.println(sql);
+		logger.debug(sql);
 		try(Connection con = ConnectionUtil.getConnection();){
 		try(PreparedStatement pst = con.prepareStatement(sql);){
 		pst.setInt(1, obj.getBusNo());
 		pst.setInt(2, obj.getAvailableSeats());
 		pst.setInt(3, obj.getTotalSeats());
 		int row = pst.executeUpdate();
-		System.out.println(row);
+		logger.info(row);
 	}
 		catch(SQLException e) {
 			throw new Exception("Unable to execute login query");
@@ -39,7 +41,7 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 		try(PreparedStatement pst = con.prepareStatement(sql);){
 		pst.setInt(1, busNo);
 		int row = pst.executeUpdate();
-		System.out.println(row);
+		logger.info(row);
 	}
 	catch(SQLException e) {
 		throw new Exception("Unable to execute login query");
@@ -51,13 +53,13 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 	}
 	public void updateAvailableSeatlist(int availableSeats, int busNo) throws Exception {
 		String sql = "update seat_availability set available_seats=?" + " where bus_no= ?";
-		System.out.println(sql);
+		logger.debug(sql);
 		try(Connection con = ConnectionUtil.getConnection();){
 		try(PreparedStatement pst = con.prepareStatement(sql);){
 		pst.setInt(1, availableSeats);
 		pst.setInt(2, busNo);
 		int row = pst.executeUpdate();
-		System.out.println(row);
+		logger.info(row);
 		}
 		catch(SQLException e) {
 			throw new Exception("Unable to execute login query");
@@ -69,7 +71,7 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 	}
 	public int availableSeatDetails(int busNo) throws Exception {
 		String sql = "select *from seat_availability where bus_no=?";
-		System.out.println(sql);
+		logger.debug(sql);
 		int seats = 0;
 		try(Connection con = ConnectionUtil.getConnection();){
 		try(PreparedStatement pst = con.prepareStatement(sql);){
@@ -83,8 +85,8 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 			throw new Exception("Unable to execute login query");
 		}
 		}
-		catch (Exception e) {
-			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		catch(SQLException e) {
+			throw new Exception("Unable to execute  preparedstatement query");
 		}
 		}
 		catch (Exception e) {
@@ -96,7 +98,7 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 
 	public ArrayList<SeatAvailability> availablebusseats(String source, String destination) throws Exception {
 		String sql = "select *from seat_availability where bus_no IN(select bus_no from bus_list where bus_source=? and bus_destination=?)";
-		System.out.println(sql);
+		logger.debug(sql);
 		ArrayList<SeatAvailability> available = new ArrayList<>();
 		try(Connection con = ConnectionUtil.getConnection();){
 		try(PreparedStatement pst = con.prepareStatement(sql);){
@@ -110,14 +112,14 @@ public class SeatAvailabilityimplementation implements SeatAvailabilityDAO {
 			p.setTotalSeats(rs.getInt("total_seats"));
 			available.add(p);
 		}
-		System.out.println(available.size());
+		logger.info(available.size());
 		}
 		catch(SQLException e) {
 			throw new Exception("Unable to execute login query");
 		}
 		}
-		catch (Exception e) {
-			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		catch(SQLException e) {
+			throw new Exception("Unable to execute preparedstatement query");
 		}
 		}
 		catch (Exception e) {

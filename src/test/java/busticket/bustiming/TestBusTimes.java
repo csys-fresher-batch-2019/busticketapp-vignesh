@@ -15,8 +15,7 @@ public class TestBusTimes {
 		BusTimingIplementation timeimpl= new BusTimingIplementation();
 		BusTiming bustimes = timeimpl.bustimes(busNo);
 		System.out.println(bustimes);
-
-		
+	
 	}
 
 }

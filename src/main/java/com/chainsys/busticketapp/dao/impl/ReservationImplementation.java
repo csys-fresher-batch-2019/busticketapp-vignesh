@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -11,12 +12,14 @@ import java.util.ArrayList;
 import com.chainsys.busticketapp.DBException;
 import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.ReservationDAO;
+import com.chainsys.busticketapp.dao.impl.mail.Mail;
+import com.chainsys.busticketapp.logger.Logger;
 import com.chainsys.busticketapp.model.ListReservation;
 import com.chainsys.busticketapp.util.ConnectionUtil;
 
 public class ReservationImplementation implements ReservationDAO {
 	ListReservation obj = new ListReservation();
-
+	Logger logger=Logger.getInstance();
 	public void addReservationList(ListReservation obj) throws Exception {
 		try(Connection con = ConnectionUtil.getConnection();){
 		/*
@@ -32,15 +35,19 @@ public class ReservationImplementation implements ReservationDAO {
 		 */
 		try(CallableStatement stmt = con.prepareCall("{call ticket_booking(?,?,?,?)}");){
 		stmt.setInt(1, obj.getBusNo());
-		System.out.println(obj.getBusNo());
+		logger.info(obj.getBusNo());
 		stmt.setInt(2, obj.getPassengerId());
-		System.out.println(obj.getPassengerId());
+		logger.info(obj.getPassengerId());
 		stmt.setInt(3, obj.getNoOfTicket());
-		System.out.println(obj.getNoOfTicket());
+		logger.info(obj.getNoOfTicket());
 		stmt.registerOutParameter(4, Types.INTEGER);
 		stmt.executeUpdate();
 		int result=stmt.getInt(4);
-		System.out.println(result);
+		logger.info(result);
+		if(result>100) {
+			Mail.send("vignesh280519@gmail.com","6369541046","vigneshn051995@gmail.com"," Your Ticket is Booked ","Thanks for using this application",obj.getPassengerId());
+		}	
+		
 	}
 		catch (Exception e) {
 			throw new DBException(ErrorMessages.NO_DATA_FOUND);
@@ -53,12 +60,12 @@ public class ReservationImplementation implements ReservationDAO {
 	}
 	public void cancelReservationList(int ticketNo) throws Exception {
 		String sql = "delete from reserve where ticket_no=?";
-		System.out.println(sql);
+		logger.debug(sql);
 		try(Connection con = ConnectionUtil.getConnection();){
 		try(PreparedStatement pst = con.prepareStatement(sql);){
 		pst.setInt(1, ticketNo);
 			int row = pst.executeUpdate();
-		System.out.println(row);
+		logger.info(row);
 	}
 		catch (Exception e) {
 			throw new DBException(ErrorMessages.NO_DATA_FOUND);
@@ -70,7 +77,7 @@ public class ReservationImplementation implements ReservationDAO {
 	}
 	public ArrayList<ListReservation> reserveDetails() throws Exception {
 		String sql = "select * from reserve";
-		System.out.println(sql);
+		logger.debug(sql);
 		ArrayList<ListReservation> List = new ArrayList<>();
 		try (Connection con = ConnectionUtil.getConnection(); Statement stmt = con.createStatement();) {
 
@@ -86,8 +93,8 @@ public class ReservationImplementation implements ReservationDAO {
 				List.add(obj);
 			}
 			}
-			catch (Exception e) {
-				throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+			catch(SQLException e) {
+				throw new Exception("Unable to execute resultset query");
 			}
 		} catch (Exception e) {
 			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
@@ -107,7 +114,7 @@ public class ReservationImplementation implements ReservationDAO {
 				}
 			}
 			catch (Exception e) {
-				throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+				throw new DBException(ErrorMessages.NO_DATA_FOUND);
 			}
 		} 
 		
@@ -125,8 +132,7 @@ public class ReservationImplementation implements ReservationDAO {
 		//System.out.println(sql);
 		
 		try (Connection con = ConnectionUtil.getConnection(); ) {
-			String sql2 = "update seat_availability set available_seats= available_seats+" + noOfTicket
-					+ " where bus_no=" + busid;
+			String sql2 = "update seat_availability set available_seats= available_seats+" + noOfTicket+ " where bus_no=" + busid;
 			try(Statement stmt = con.createStatement();){
 				int row1 = stmt.executeUpdate(sql2);
 				String sql3 = "update reserve r set total_amount = ( (no_of_ticket - ?)*(select amount from bus_time where bus_no=r.bus_no)),"
@@ -135,17 +141,17 @@ public class ReservationImplementation implements ReservationDAO {
 				pst1.setInt(1, noOfTicket);
 				pst1.setInt(2, noOfTicket);
 				pst1.setInt(3, ticketNo);
-				System.out.println(sql3);
+				logger.debug(sql3);
 				int row2 = pst1.executeUpdate();
-				System.out.println(row1);
-				System.out.println(row2);
+				logger.info(row1);
+				logger.info(row2);
 		}
-			catch (Exception e) {
-				throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+			catch(SQLException e) {
+				logger.error("Unable to execute preparedstatement query");
 			}
 			
-		}catch (Exception e) {
-			throw new DBException(ErrorMessages.CONNECTION_FAILURE);
+		}catch(SQLException e) {
+			logger.error("Unable to execute statement query");
 		}
 			
 		}
