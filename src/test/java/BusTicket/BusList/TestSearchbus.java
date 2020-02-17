@@ -16,7 +16,7 @@ public class TestSearchbus {
 		String source = sc.next();
 		System.out.println("Enter Destination Name:");
 		String destination = sc.next();
-		List<ListOfBuses> sourceTest = new ArrayList<ListOfBuses>();
+		List<ListOfBuses> sourceTest = new ArrayList<>();
 		sourceTest = busimpl.sourceStationlist(source, destination);
 
 		for (ListOfBuses p : sourceTest) {

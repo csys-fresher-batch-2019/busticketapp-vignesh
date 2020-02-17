@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import com.chainsys.busticketapp.DBException;
 import com.chainsys.busticketapp.ErrorMessages;
 import com.chainsys.busticketapp.dao.PassengerDAO;
+import com.chainsys.busticketapp.dao.impl.mail.Mail;
 import com.chainsys.busticketapp.logger.Logger;
 import com.chainsys.busticketapp.model.Passenger;
 import com.chainsys.busticketapp.util.ConnectionUtil;
@@ -22,8 +23,12 @@ public class PassengerImplementation implements PassengerDAO
 			pst.setInt(2, obj.getPassengerAge());
 			pst.setString(3, obj.getPassengerGender());
 			pst.setLong(4, obj.getPassengerContact());
-			int row = pst.executeUpdate();
-			logger.info(row);			
+			 int row=pst.executeUpdate();
+			//int result=obj.getPassengerId();
+			logger.info(row);
+			if(row==1) {
+				Mail.send("vignesh280519@gmail.com","6369541046","vigneshn051995@gmail.com"," Thanks for using this application ","Your PassengerID:",obj.getPassengerId());
+			}	
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

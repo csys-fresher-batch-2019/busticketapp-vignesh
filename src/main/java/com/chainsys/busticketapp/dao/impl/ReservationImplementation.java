@@ -23,15 +23,17 @@ public class ReservationImplementation implements ReservationDAO {
 	public void addReservationList(ListReservation obj) throws Exception {
 		try(Connection con = ConnectionUtil.getConnection();){
 		/*
-		 * String
-		 * sql="insert into reserve(ticket_no,bus_no,pas_id,no_of_ticket,journy_date) values(ticket_no.nextval,?,?,?,?)"
-		 * ; Connection con = TestConnections.getConnection(); System.out.println(sql);
-		 * PreparedStatement pst=con.prepareStatement(sql);
-		 * 
-		 * pst.setInt(1,obj.BusNo); pst.setInt(2,obj.PassengerId);
-		 * pst.setInt(3,obj.NoOfTicket); LocalDate ld=LocalDate.parse(obj.date); Date
-		 * Journydate=Date.valueOf(ld); pst.setDate(4, Journydate); int
-		 * row=pst.executeUpdate(); System.out.println(row);
+		 * String sql1="insert into reserve(ticket_no,bus_no,pas_id,no_of_ticket,journy_date) values(ticket_no.nextval,?,?,?,?)";
+		 * Connection con = TestConnections.getConnection(); 
+		 * System.out.println(sql1);
+		 * PreparedStatement pst=con.prepareStatement(sql1);
+		 * pst.setInt(1,obj.BusNo); 
+		 * pst.setInt(2,obj.PassengerId);
+		 * pst.setInt(3,obj.NoOfTicket);
+		 * LocalDate ld=LocalDate.parse(obj.date);
+		 * DateJournydate=Date.valueOf(ld);
+		 * pst.setDate(4, Journydate);
+		 *int row=pst.executeUpdate(); System.out.println(row);
 		 */
 		try(CallableStatement stmt = con.prepareCall("{call ticket_booking(?,?,?,?)}");){
 		stmt.setInt(1, obj.getBusNo());
@@ -128,23 +130,23 @@ public class ReservationImplementation implements ReservationDAO {
 	public void updateNoOfTicket(int ticketNo, int passengerId, int noOfTicket) throws Exception {
 		int busid = getBusNo(ticketNo);
 
-		//String sql = "update reserve set no_of_ticket=? where ticket_no=? and pas_id=?";
-		//System.out.println(sql);
+		//String sql2 = "update reserve set no_of_ticket=? where ticket_no=? and pas_id=?";
+		//System.out.println(sql2);
 		
 		try (Connection con = ConnectionUtil.getConnection(); ) {
-			String sql2 = "update seat_availability set available_seats= available_seats+" + noOfTicket+ " where bus_no=" + busid;
+			String sql = "update seat_availability set available_seats= available_seats+" + noOfTicket+ " where bus_no=" + busid;
 			try(Statement stmt = con.createStatement();){
-				int row1 = stmt.executeUpdate(sql2);
-				String sql3 = "update reserve r set total_amount = ( (no_of_ticket - ?)*(select amount from bus_time where bus_no=r.bus_no)),"
+				int row = stmt.executeUpdate(sql);
+				String sql1 = "update reserve r set total_amount = ( (no_of_ticket - ?)*(select amount from bus_time where bus_no=r.bus_no)),"
 						+ "no_of_ticket=no_of_ticket- ? where ticket_no = ?";
-			try(PreparedStatement pst1 = con.prepareStatement(sql3);){
+			try(PreparedStatement pst1 = con.prepareStatement(sql1);){
 				pst1.setInt(1, noOfTicket);
 				pst1.setInt(2, noOfTicket);
 				pst1.setInt(3, ticketNo);
-				logger.debug(sql3);
-				int row2 = pst1.executeUpdate();
+				logger.debug(sql1);
+				int row1 = pst1.executeUpdate();
+				logger.info(row);
 				logger.info(row1);
-				logger.info(row2);
 		}
 			catch(SQLException e) {
 				logger.error("Unable to execute preparedstatement query");

@@ -42,7 +42,8 @@ public class Mail {
         	BodyPart messageBodyPart2 = new MimeBodyPart(); 
         	messageBodyPart2.setText("\nPassenger id: \t\t "+id);
         	BodyPart messageBodyPart3 = new MimeBodyPart(); 
-        	messageBodyPart3.setText("\n\t\tYour  ticket was booked ");
+        	messageBodyPart3.setText("\n\t\t"+sub);
+        	//messageBodyPart3.setText("\n\t\t"+ Msg);
         	BodyPart messageBodyPart4 = new MimeBodyPart(); 
         	messageBodyPart4.setText("\n\t\tThank you");
         	BodyPart messageBodyPart5 = new MimeBodyPart(); 

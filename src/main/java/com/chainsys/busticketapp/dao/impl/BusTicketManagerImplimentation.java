@@ -45,7 +45,7 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			logger.info(row);
 
 		}catch (Exception e) {
-			throw new DBException(ErrorMessages.ADMIN_LOGIN_FAILED);
+			throw new DBException(ErrorMessages.INORRECT_VALUE);
 		}
 		}
 				catch (Exception e) {
@@ -140,6 +140,8 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 
 	public List<ListOfBuses> sourceStationlist(String busSource, String busDestination) throws DBException {
 		String sql = "select *from bus_list where bus_source=? and bus_destination=?";
+		String sourceData1;
+		String sourceData2;
 		List<ListOfBuses> source = new ArrayList<>();
 		try (Connection con = ConnectionUtil.getConnection();){
 				try(PreparedStatement pst=con.prepareStatement(sql);){
@@ -148,6 +150,9 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 			try(ResultSet rs = pst.executeQuery();) {
 			// System.out.println("BusNo:\tSource:\tDestination\tBusName:\tClass:");
 			while (rs.next()) {
+				sourceData1=rs.getString("bus_source");
+				sourceData2=rs.getString("bus_destination");
+				if(sourceData1.equals(busSource)&& sourceData2.equals(busDestination)) {
 				ListOfBuses p = new ListOfBuses();
 				p.setBusNo(rs.getInt("bus_no"));
 				p.setBusName(rs.getString("bus_name"));
@@ -156,7 +161,11 @@ public class BusTicketManagerImplimentation implements BusTicketDAO {
 				p.setClazz(rs.getString("class"));
 				source.add(p);
 			}
+				else {
+					logger.error("Invaild Source and Destination");
 				}
+			}
+			}
 			catch(SQLException e) {
 				throw new Exception("Unable to execute resultset query");
 			}
